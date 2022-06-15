@@ -6,9 +6,9 @@ CFA_SRC_DIR=../CFA-C/src
 CFA_LIB_DIR=../CFA-C/lib
 BLD_DIR=build
 BLD_EX_DIR=$(BLD_DIR)/examples
-TST_OUT_DIR=test
-TST_EX_OUT_DIR=$(TST_OUT_DIR)/examples
-TST_SRC_DIR=$(SRC_DIR)/test
+TST_OUT_DIR=examples
+TST_EX_OUT_DIR=$(TST_OUT_DIR)/test
+TST_SRC_DIR=test
 LIB_DIR=lib
 
 # CFA-CPP sources
