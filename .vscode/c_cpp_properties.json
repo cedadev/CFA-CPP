@@ -1,0 +1,25 @@
+{
+    "env": {
+        "myDefaultIncludePath": [
+            "${workspaceFolder}",
+            "${workspaceFolder}/include"
+        ],
+        "myCompilerPath": "/usr/local/bin/gcc-7"
+    },
+    "configurations": [
+        {
+            "name": "CFA-CPP-config",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/../CFA-C/src"
+            ],
+            "defines": [],
+            "macFrameworkPath": [],
+            "compilerPath": "/usr/local/bin/gcc-11",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "macos-gcc-x64"
+        }
+    ],
+    "version": 4
+}
