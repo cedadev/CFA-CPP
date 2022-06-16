@@ -1,7 +1,7 @@
-#include "CFADataset.h"
+#include "CFAFile.h"
 #include <stdexcept>
 
-CFADataset::CFADataset(std::string path)
+CFAFile::CFAFile(std::string path)
 {
     /* Have an enum for file format */
     int cfa_idp;

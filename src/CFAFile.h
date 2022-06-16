@@ -8,10 +8,10 @@ extern "C" {
     #include "cfa.h"
 }
 
-class CFADataset
+class CFAFile
 {
     public:
-        CFADataset(std::string path);
+        CFAFile(std::string path);
 };
 
 #endif

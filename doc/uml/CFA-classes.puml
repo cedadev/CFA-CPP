@@ -1,0 +1,65 @@
+@startuml CFA-classes
+class CFAFile #LightCoral {
+    +CFAFile()
+    +CFAFile(string path, CFAFileFormat format, CFAFileMode mode="r")
+    +void open(string path, CFAFileFormat format)
+    +void create(string path, CFAFileFormat format)
+    +void enddef()
+    +void close()
+}
+
+class CFAGroup #SkyBlue {
+    +CFAGroup(string name)
+    +string getName()
+    +int getId()
+    +CFAGroup getParentGroup()
+    
+    +int getGroupCount()
+    +CFAGroup getGroup(int grp_id)
+    +CFAGroup getGroup(string name)
+    +CFAGroup addGroup(string name)
+
+    +int getVarCount()
+    +CFAVar getVar(int var_id)
+    +CFAVar getVar(string varname)
+    +CFAVar addVar(string varname, cfa_type dtype)
+    +CFAVar addVar(string varname, cfa_type dtype, string dimname)
+    +CFAVar addVar(string varname, cfa_type dtype, std::vector<std::string> dimnames)
+    +CFAVar addVar(string varname, std::vector<int> dim_ids)
+
+    +int getDimCount()
+    +CFADim getDim(int dim_id)
+    +CFADim getDim(string dimname)
+    +CFADim addDim(string dimname, cfa_type dtype)
+    +CFADim addDim(string dimname, cfa_type dtype, int dimlen)
+}
+
+class CFAVar #LimeGreen {
+    +CFAVar(string name, cfa_type dtype)
+    +CFAGroup getParentGroup()
+    +cfa_type getType()
+    +string getName()
+    +int getId()
+    +int getDimCount()
+    +CFADim getDim(int i)
+    std::vector<CFADim> getDims()
+    std::vector<std::string> getDimNames()
+}
+
+class CFADim #Yellow {
+    +CFADim(string name, cfa_type dtype)
+    +CFADim(string name, cfa_type dtype, int dimlen)
+    +CFAGroup getParentGroup()
+    +cfa_type getType()
+    +string getName()
+    +int getId()
+    +int getLen()
+        
+}
+
+CFAFile <|-- CFAGroup
+CFAGroup "1" *-- "0..*" CFAVar
+CFAGroup "1" *-- "0..*" CFADim
+CFAFile "1" *-- "0..*" CFAGroup
+
+@enduml
