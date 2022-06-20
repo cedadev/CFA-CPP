@@ -24,19 +24,19 @@ class CFAGroup
         int getGroupCount();
 
         CFAGroup getParentGroup();
-        CFAGroup getGroup(int group_id);
+        CFAGroup getGroup(int groupId);
         CFAGroup getGroup(std::string name);
         CFAGroup addGroup(std::string name);
 
-        CFAVar getVar(int var_id);
-        CFAVar getVar(std::string var_name);
-        CFAVar addVar(std::string var_name, cfa_type d_type);
-        CFAVar addVar(std::string var_name, cfa_type d_type, std::string dim_name);
-        CFAVar addVar(std::string var_name, cfa_type d_type, std::vector<std::string> dim_names);
-        CFAVar addVar(std::string var_name, std::vector<int> dim_ids);
+        CFAVar getVar(int varId);
+        CFAVar getVar(std::string varName);
+        CFAVar addVar(std::string varName, cfa_type dType);
+        CFAVar addVar(std::string varName, cfa_type dType, std::string dimName);
+        CFAVar addVar(std::string varName, cfa_type dType, std::vector<std::string> dimNames);
+        CFAVar addVar(std::string varName, std::vector<int> dimIds);
 
-        CFADim getDim(int dim_id);
-        CFADim getDim(std::string dim_name);
-        CFADim addDim(std::string dim_name, cfa_type d_type);
-        CFADim addDim(std::string dim_name, cfa_type d_type, int dim_len);
+        CFADim getDim(int dimId);
+        CFADim getDim(std::string dimName);
+        CFADim addDim(std::string dimName, cfa_type dType);
+        CFADim addDim(std::string dimName, cfa_type dType, int dimLen);
 };
