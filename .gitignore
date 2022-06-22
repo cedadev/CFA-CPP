@@ -1,1 +1,4 @@
 *.log
+build/
+lib/
+.vscode/settings.json
