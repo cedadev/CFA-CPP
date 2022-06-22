@@ -13,6 +13,11 @@ class CFADim;
 
 class CFAGroup
 {
+    private:
+        int id;
+        std::string name;
+
+        CFAGroup* parentGroup;
     public:
         CFAGroup(std::string name);
         
