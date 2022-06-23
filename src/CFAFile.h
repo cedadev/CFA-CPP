@@ -10,11 +10,18 @@ extern "C" {
     #include "cfa.h"
 }
 
-class CFAFile : public CFAGroup
+class CFAFileMode;
+
+class CFAFile
 {
     public:
         CFAFile(std::string path);
+        CFAFile(std::string path, CFAFileFormat format, CFAFileMode mode);
 
+        void open(std::string path, CFAFileFormat format);
+        void create(std::string path, CFAFileFormat format);
+        void enddef();
+        void close();
 };
 
 #endif
