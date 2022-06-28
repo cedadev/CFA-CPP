@@ -19,10 +19,11 @@ class CFAGroup
 
         CFAGroup* parent;
         std::vector<CFAGroup> groups;
+        
+        CFAGroup(std::string name, int id, CFAGroup* parent);
     public:
         CFAGroup();
         CFAGroup(std::string name);
-        CFAGroup(std::string name, int id, CFAGroup* parent);
         
         int getId();
         std::string getName();
