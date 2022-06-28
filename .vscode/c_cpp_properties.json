@@ -8,7 +8,7 @@
     },
     "configurations": [
         {
-            "name": "CFA-CPP-config",
+            "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/../CFA-C/src"
@@ -19,6 +19,19 @@
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "macos-gcc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/../CFA-C/src"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
             "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],

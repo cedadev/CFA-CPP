@@ -12,11 +12,16 @@
             "cwd": "${workspaceRoot}",
             "targetArchitecture": "x64",
             "osx": {
-                "MIMode": "lldb"
-            },  
+                "MIMode": "lldb",
+                "environment": [{"name" : "DYLD_LIBRARY_PATH",
+                    "value" : "$DYLD_LIBRARY_PATH:../CFA-C/lib"}]
+            },
+            "linux": {
+                "MIMode": "gdb",
+                "environment": [{"name" : "LD_LIBRARY_PATH",
+                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}]
+            },
             "preLaunchTask": "build_example1",
-            "environment": [{"name" : "DYLD_LIBRARY_PATH",
-                             "value" : "../CFA-C/lib"}]
         },
     ],
 }

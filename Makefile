@@ -27,7 +27,7 @@ DEBUGFLAGS=-O0 -D_DEBUG -Wall -Wextra -g
 SFLAGS=-L$(CFA_LIB_DIR) -shared -fPIC -lnetcdf -lcfa
 
 # Linker flags for everthing else
-LFLAGS=-L$(LIB_DIR) -L$(CFA_LIB_DIR) -lcfa -lcfacpp -lnetcdf -lstdc++
+LFLAGS=-L$(CFA_LIB_DIR) -lcfa -L$(LIB_DIR) -lcfacpp -lnetcdf -lstdc++
 
 # make everything (just the library at the moment.  Will have the tests and
 # the examples eventually)
@@ -50,7 +50,7 @@ $(TST_EX_OUT_DIR): $(TST_OUT_DIR)
 	mkdir $(TST_EX_OUT_DIR)
 
 $(CFA_CPP_LIB) : $(CFA_CPP_SRC) $(LIB_DIR)
-	$(CC) $(CFLAGS) $(DEBUGFLAGS) $(SFLAGS) -lstdc++ $< -o $(LIB_DIR)/$@
+	$(CC) $(CFLAGS) $(DEBUGFLAGS) $(SFLAGS) -lstdc++ $(CFA_CPP_SRC) -o $(LIB_DIR)/$@
 
 example% : $(TST_SRC_DIR)/examples/example%.cpp $(CFA_CPP_LIB) $(BLD_EX_DIR) $(TST_EX_OUT_DIR)
 	$(CC) $(CFLAGS) $(DEBUGFLAGS) $(LFLAGS) $< -o $(BLD_DIR)/examples/$@
