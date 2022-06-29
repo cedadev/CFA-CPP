@@ -13,7 +13,7 @@ class CFADim;
 
 class CFAGroup
 {
-    private:
+    protected:
         int id;
         std::string name;
 

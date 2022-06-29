@@ -23,7 +23,6 @@ CFAGroup CFAGroup::getGroup(std::string name)
 
 CFAGroup CFAGroup::addGroup(std::string name)
 {
-    int id = -1;
     int cfaErr = cfa_def_cont(this->id, name.c_str(), &id);
     if (cfaErr)
         throw (cfaErr);
