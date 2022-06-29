@@ -2,14 +2,15 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
+
+#include "CFAVar.h"
+#include "CFADim.h"
 
 // declare CFA-C library as external C library
 extern "C" {
     #include "cfa.h"
 }
-
-class CFAVar;
-class CFADim;
 
 class CFAGroup
 {    
@@ -18,6 +19,8 @@ class CFAGroup
         std::string name;
 
         CFAGroup* parent;
+        std::vector<CFAVar> vars;
+        std::vector<CFADim> dims;
         std::vector<CFAGroup> groups;
     public:
         CFAGroup();
@@ -33,19 +36,19 @@ class CFAGroup
         int getGroupCount();
 
         CFAGroup getParentGroup();
-        CFAGroup getGroup(int groupId);
+        CFAGroup getGroup(int id);
         CFAGroup getGroup(std::string name);
         CFAGroup addGroup(std::string name);
 
-        CFAVar getVar(int varId);
-        CFAVar getVar(std::string varName);
-        CFAVar addVar(std::string varName, cfa_type dType);
-        CFAVar addVar(std::string varName, cfa_type dType, std::string dimName);
-        CFAVar addVar(std::string varName, cfa_type dType, std::vector<std::string> dimNames);
-        CFAVar addVar(std::string varName, std::vector<int> dimIds);
+        CFAVar getVar(int id);
+        CFAVar getVar(std::string name);
+        CFAVar addVar(std::string name, cfa_type type);
+        CFAVar addVar(std::string name, cfa_type type, std::string dimName);
+        CFAVar addVar(std::string name, cfa_type type, std::vector<std::string> dimNames);
+        CFAVar addVar(std::string name, std::vector<int> dimIds);
 
-        CFADim getDim(int dimId);
-        CFADim getDim(std::string dimName);
-        CFADim addDim(std::string dimName, cfa_type dType);
-        CFADim addDim(std::string dimName, cfa_type dType, int dimLen);
+        CFADim getDim(int id);
+        CFADim getDim(std::string name);
+        CFADim addDim(std::string name, cfa_type type);
+        CFADim addDim(std::string name, cfa_type type, int dimLen);
 };
