@@ -10,6 +10,7 @@ CFAFile::CFAFile(std::string path)
 }
 CFAFile::CFAFile(std::string path, CFAFileFormat format, CFAFileMode mode)
 {
+    this->mode = mode;
     int cfa_err = cfa_create(path.c_str(), format, &id);
     if(cfa_err)
         throw std::runtime_error("Stop!");
