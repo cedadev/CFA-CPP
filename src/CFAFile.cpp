@@ -30,7 +30,9 @@ void CFAFile::create(std::string path, CFAFileFormat format)
 }
 void CFAFile::enddef()
 {
-    throw std::runtime_error("Not Implemented!");
+    int cfa_err = cfa_serialise(id);
+    if(cfa_err)
+        throw std::runtime_error("Stop!");
 }
 void CFAFile::close()
 {
