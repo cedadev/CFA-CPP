@@ -3,18 +3,26 @@
 #include <string>
 #include <vector>
 
+#include "CFADim.h"
+#include "CFAGroup.h"
+
 // declare CFA-C library as external C library
 extern "C" {
     #include "cfa.h"
 }
 
-class CFAGroup;
-class CFADim;
-
 class CFAVar
 {
+    private:
+        int id;
+        cfa_type type;
+        std::string name;
+
+        CFAGroup parent;
+        std::vector<CFADim> dims;
     public:
-        CFAVar(std::string name, cfa_type d_type);
+        CFAVar(std::string name, cfa_type type);
+        CFAVar(std::string name, cfa_type type, CFAGroup parent, std::vector<CFADim> dims);
         
         int getId();
         int getDimCount();
