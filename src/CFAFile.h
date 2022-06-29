@@ -18,7 +18,7 @@ class CFAFile : CFAGroup
         CFAFileFormat format;
     public:
         CFAFile(std::string path);
-        CFAFile(std::string path, CFAFileFormat format, CFAFileMode mode);
+        CFAFile(std::string path, CFAFileFormat format, CFAFileMode mode = CFAFileMode::READ);
 
         void open(std::string path, CFAFileFormat format);
         void create(std::string path, CFAFileFormat format);

@@ -30,7 +30,7 @@ void CFAFile::create(std::string path, CFAFileFormat format)
 }
 void CFAFile::enddef()
 {
-
+    throw std::runtime_error("Not Implemented!");
 }
 void CFAFile::close()
 {
