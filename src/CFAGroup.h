@@ -12,18 +12,18 @@ class CFAVar;
 class CFADim;
 
 class CFAGroup
-{
+{    
     protected:
         int id;
         std::string name;
 
         CFAGroup* parent;
         std::vector<CFAGroup> groups;
-        
-        CFAGroup(std::string name, int id, CFAGroup* parent);
     public:
         CFAGroup();
         CFAGroup(std::string name);
+        // Need to discuss this more with Neil
+        CFAGroup(std::string name, int id, CFAGroup* parent);
         
         int getId();
         std::string getName();
