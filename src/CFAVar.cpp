@@ -6,7 +6,7 @@ CFAVar::CFAVar(std::string name, cfa_type type)
     this->name = name;
     this->type = type;
 }
-CFAVar::CFAVar(std::string name, cfa_type type, CFAGroup parent, std::vector<CFADim> dims) : CFAVar(name, type)
+CFAVar::CFAVar(std::string name, cfa_type type, CFAGroup *parent, std::vector<CFADim> dims) : CFAVar(name, type)
 {
     this->parent = parent;
     this->dims = dims;
@@ -17,7 +17,7 @@ int CFAVar::getDimCount() { return dims.size(); }
 std::string CFAVar::getName() { return name; }
 cfa_type CFAVar::getType() { return type; }
 CFADim CFAVar::getDim(int i) { return dims[i]; }
-CFAGroup CFAVar::getParentGroup() { return parent; }
+CFAGroup* CFAVar::getParentGroup() { return parent; }
 
 std::vector<CFADim> CFAVar::getDims() { return dims; }
 std::vector<std::string> CFAVar::getDimNames()

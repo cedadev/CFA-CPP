@@ -1,12 +1,13 @@
 #pragma once
 
 #include <string>
-#include "CFAGroup.h"
 
 // declare CFA-C library as external C library
 extern "C" {
     #include "cfa.h"
 }
+
+class CFAGroup;
 
 class CFADim
 {
@@ -16,14 +17,14 @@ class CFADim
         cfa_type type;
         std::string name;
 
-        CFAGroup parent;
+        CFAGroup* parent;
     public:
         CFADim(std::string name, cfa_type type);
-        CFADim(std::string name, cfa_type type, int dimLen, CFAGroup parent);
+        CFADim(std::string name, cfa_type type, int dimLen, CFAGroup *parent);
         
         int getId();
         int getLen();
         std::string getName();
         cfa_type getType();
-        CFAGroup getParentGroup();
+        CFAGroup* getParentGroup();
 };
