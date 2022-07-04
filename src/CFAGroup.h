@@ -25,8 +25,6 @@ class CFAGroup
     public:
         CFAGroup();
         CFAGroup(std::string name);
-        // Need to discuss this more with Neil
-        CFAGroup(std::string name, int id, CFAGroup* parent);
         
         int getId();
         std::string getName();

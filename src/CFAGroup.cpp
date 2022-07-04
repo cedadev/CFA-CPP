@@ -1,12 +1,11 @@
 #include "CFAGroup.h"
 #include <stdexcept>
 
-CFAGroup::CFAGroup() { id = -1; }
-CFAGroup::CFAGroup(std::string name) : CFAGroup() { this->name = name; }
-CFAGroup::CFAGroup(std::string name, int id, CFAGroup* parent) : CFAGroup(name) 
-{
-    this->id = id;
-    this->parent = parent;
+CFAGroup::CFAGroup(std::string name) 
+{ 
+    this->id = -1;
+    this->name = name;
+    this->parent = nullptr;
 }
 
 std::string CFAGroup::getName() { return name; }
@@ -39,7 +38,7 @@ CFAGroup CFAGroup::addGroup(std::string name)
     int cfaErr = cfa_def_cont(this->id, name.c_str(), &id);
     if (cfaErr)
         throw (cfaErr);
-    return groups.emplace_back(name, id, this);
+    return groups.emplace_back(name);
 }
 
 CFAVar CFAGroup::getVar(int id) 
@@ -61,19 +60,19 @@ CFAVar CFAGroup::getVar(std::string name)
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type)
 {
-    throw std::runtime_error("Not Implemented");
+    return vars.emplace_back(id, name, type);
 }
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::string dimName)
 {
-    throw std::runtime_error("Not Implemented");
+    return vars.emplace_back(id, name, type);
 }
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<std::string> dimNames)
 {
-    throw std::runtime_error("Not Implemented");
+    return vars.emplace_back(id, name, type);
 }
 CFAVar CFAGroup::addVar(std::string name, std::vector<int> dimIds)
 {
-    throw std::runtime_error("Not Implemented");
+    return vars.emplace_back(id, name, 0);
 }
 
 CFADim CFAGroup::getDim(int id)
@@ -95,9 +94,9 @@ CFADim CFAGroup::getDim(std::string name)
 
 CFADim CFAGroup::addDim(std::string name, cfa_type type)
 {
-    throw std::runtime_error("Not Implemented");
+    return dims.emplace_back(id, name, 0, type);
 }
 CFADim CFAGroup::addDim(std::string name, cfa_type type, int dimLen)
 {
-    throw std::runtime_error("Not Implemented");
+    return dims.emplace_back(id, name, dimLen, type);
 }
