@@ -1,20 +1,41 @@
 #include "CFADim.h"
 
-CFADim::CFADim(std::string name, cfa_type type)
+CFADim::CFADim(int parentId, std::string name, int dimLen, cfa_type type)
 {
-    id = -1;
-    dimLen = -1;
-    this->name = name;
-    this->type = type;
-}
-CFADim::CFADim(std::string name, cfa_type type, int dimLen, CFAGroup *parent) : CFADim(name, type)
-{
-    this->dimLen = dimLen;
-    this->parent = parent;
+    this->parentId = parentId;
+    int cfaErr = cfa_def_dim(parentId, name.c_str(), dimLen, type, &id);
+    if (cfaErr)
+        throw (cfaErr);
 }
 
-int CFADim::getId() { return id; }
-int CFADim::getLen() { return dimLen; }
-std::string CFADim::getName() { return name; }
-cfa_type CFADim::getType() { return type; }
-CFAGroup* CFADim::getParentGroup() { return parent; }
+int CFADim::getId() 
+{
+    return id; 
+}
+
+int CFADim::getLen() 
+{ 
+    AggregatedDimension *aggDim;
+    int cfaErr = cfa_get_dim(parentId, id, &aggDim);
+    if (cfaErr)
+        throw (cfaErr);
+    return aggDim->length; 
+}
+
+std::string CFADim::getName() 
+{
+    AggregatedDimension *aggDim;
+    int cfaErr = cfa_get_dim(parentId, id, &aggDim);
+    if (cfaErr)
+        throw (cfaErr);
+    return aggDim->name; 
+}
+
+cfa_type CFADim::getType()
+{ 
+    AggregatedDimension *aggDim;
+    int cfaErr = cfa_get_dim(parentId, id, &aggDim);
+    if (cfaErr)
+        throw (cfaErr);
+    return aggDim->cfa_dtype.type; 
+}

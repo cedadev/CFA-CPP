@@ -7,24 +7,16 @@ extern "C" {
     #include "cfa.h"
 }
 
-class CFAGroup;
-
 class CFADim
 {
     private:
         int id;
-        int dimLen;
-        cfa_type type;
-        std::string name;
-
-        CFAGroup* parent;
+        int parentId;
     public:
-        CFADim(std::string name, cfa_type type);
-        CFADim(std::string name, cfa_type type, int dimLen, CFAGroup *parent);
+        CFADim(int parentId, std::string name, int dimLen, cfa_type type);
         
         int getId();
         int getLen();
         std::string getName();
         cfa_type getType();
-        CFAGroup* getParentGroup();
 };

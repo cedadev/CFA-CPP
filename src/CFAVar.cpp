@@ -1,25 +1,51 @@
 #include "CFAVar.h"
 
-CFAVar::CFAVar(std::string name, cfa_type type)
+CFAVar::CFAVar(int parentId, std::string name, cfa_type type)
 {
-    id = -1;
-    this->name = name;
-    this->type = type;
-}
-CFAVar::CFAVar(std::string name, cfa_type type, CFAGroup *parent, std::vector<CFADim> dims) : CFAVar(name, type)
-{
-    this->parent = parent;
-    this->dims = dims;
+    this->parentId = parentId;
+    int cfaErr = cfa_def_var(parentId, name.c_str(), type, &id);
+    if (cfaErr)
+        throw (cfaErr);
 }
         
-int CFAVar::getId() { return id; }
-int CFAVar::getDimCount() { return dims.size(); }
-std::string CFAVar::getName() { return name; }
-cfa_type CFAVar::getType() { return type; }
-CFADim CFAVar::getDim(int i) { return dims[i]; }
-CFAGroup* CFAVar::getParentGroup() { return parent; }
+int CFAVar::getId() 
+{ 
+    return id; 
+}
 
-std::vector<CFADim> CFAVar::getDims() { return dims; }
+int CFAVar::getDimCount() 
+{
+    return dims.size(); 
+}
+
+std::string CFAVar::getName() 
+{
+    AggregationVariable *aggVar;
+    int cfaErr = cfa_get_var(parentId, id, &aggVar);
+    if (cfaErr)
+        throw (cfaErr);
+    return aggVar->name; 
+}
+
+cfa_type CFAVar::getType() 
+{ 
+    AggregationVariable *aggVar;
+    int cfaErr = cfa_get_var(parentId, id, &aggVar);
+    if (cfaErr)
+        throw (cfaErr);
+    return aggVar->cfa_dtype.type; 
+}
+
+CFADim CFAVar::getDim(int i) 
+{    
+    return dims[i];
+}
+
+std::vector<CFADim> CFAVar::getDims() 
+{ 
+    return dims; 
+}
+
 std::vector<std::string> CFAVar::getDimNames()
 {
     std::vector<std::string> dimNames;

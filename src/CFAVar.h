@@ -16,21 +16,17 @@ class CFAVar
 {
     private:
         int id;
-        cfa_type type;
-        std::string name;
+        int parentId;
 
-        CFAGroup* parent;
         std::vector<CFADim> dims;
     public:
-        CFAVar(std::string name, cfa_type type);
-        CFAVar(std::string name, cfa_type type, CFAGroup *parent, std::vector<CFADim> dims);
+        CFAVar(int parentId, std::string name, cfa_type type);
         
         int getId();
         int getDimCount();
         std::string getName();
         cfa_type getType();
         CFADim getDim(int i);
-        CFAGroup* getParentGroup();
     private:
         std::vector<CFADim> getDims();
         std::vector<std::string> getDimNames();
