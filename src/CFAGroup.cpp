@@ -94,7 +94,7 @@ CFADim CFAGroup::getDim(std::string name)
 
 CFADim CFAGroup::addDim(std::string name, cfa_type type)
 {
-    return dims.emplace_back(id, name, 0, type);
+    return dims.emplace_back(id, name, type);
 }
 CFADim CFAGroup::addDim(std::string name, cfa_type type, int dimLen)
 {

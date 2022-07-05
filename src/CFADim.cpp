@@ -1,5 +1,16 @@
 #include "CFADim.h"
 
+CFADim::CFADim(int parentId, int dimId)
+{
+    this->parentId = parentId;
+    this->id = dimId;
+}
+
+CFADim::CFADim(int parentId, std::string name, cfa_type type) : CFADim(parentId, name, 1, type)
+{
+    
+}
+
 CFADim::CFADim(int parentId, std::string name, int dimLen, cfa_type type)
 {
     this->parentId = parentId;
