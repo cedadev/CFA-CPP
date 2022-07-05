@@ -1,5 +1,11 @@
 #include "CFAVar.h"
 
+CFAVar::CFAVar(int parentId, int varId)
+{
+    this->parentId = parentId;
+    this->id = varId;
+}
+
 CFAVar::CFAVar(int parentId, std::string name, cfa_type type)
 {
     this->parentId = parentId;

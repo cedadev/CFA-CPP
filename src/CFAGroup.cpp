@@ -8,13 +8,35 @@ CFAGroup::CFAGroup(std::string name)
     this->parent = nullptr;
 }
 
-std::string CFAGroup::getName() { return name; }
-int CFAGroup::getId() { return id; }
-int CFAGroup::getVarCount() { return vars.size(); }
-int CFAGroup::getDimCount() { return dims.size(); }
-int CFAGroup::getGroupCount() { return groups.size(); }
+std::string CFAGroup::getName() 
+{ 
+    return name; 
+}
 
-CFAGroup CFAGroup::getParentGroup() { return *parent; }
+int CFAGroup::getId() 
+{ 
+    return id; 
+}
+
+int CFAGroup::getVarCount() 
+{ 
+    return vars.size(); 
+}
+
+int CFAGroup::getDimCount() 
+{ 
+    return dims.size(); 
+}
+
+int CFAGroup::getGroupCount() 
+{ 
+    return groups.size(); 
+}
+
+CFAGroup CFAGroup::getParentGroup() 
+{ 
+    return *parent; 
+}
 
 CFAGroup CFAGroup::getGroup(int id) 
 {  
@@ -24,6 +46,7 @@ CFAGroup CFAGroup::getGroup(int id)
     else
         throw std::runtime_error("Found no group with id!");
 }
+
 CFAGroup CFAGroup::getGroup(std::string name) 
 {  
     auto it = std::find_if(groups.begin(), groups.end(), [name](CFAGroup& group) { return group.getName() == name; });
@@ -49,6 +72,7 @@ CFAVar CFAGroup::getVar(int id)
     else
         throw std::runtime_error("Found no var with id!");
 }
+
 CFAVar CFAGroup::getVar(std::string name) 
 {  
     auto it = std::find_if(vars.begin(), vars.end(), [name](CFAVar& var) { return var.getName() == name; });
@@ -62,14 +86,17 @@ CFAVar CFAGroup::addVar(std::string name, cfa_type type)
 {
     return vars.emplace_back(id, name, type);
 }
+
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::string dimName)
 {
     return vars.emplace_back(id, name, type);
 }
+
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<std::string> dimNames)
 {
     return vars.emplace_back(id, name, type);
 }
+
 CFAVar CFAGroup::addVar(std::string name, std::vector<int> dimIds)
 {
     return vars.emplace_back(id, name, 0);
@@ -83,6 +110,7 @@ CFADim CFAGroup::getDim(int id)
     else
         throw std::runtime_error("Found no dim with id!");
 }
+
 CFADim CFAGroup::getDim(std::string name)
 {
     auto it = std::find_if(dims.begin(), dims.end(), [name](CFADim& dim) { return dim.getName() == name; });
@@ -96,6 +124,7 @@ CFADim CFAGroup::addDim(std::string name, cfa_type type)
 {
     return dims.emplace_back(id, name, type);
 }
+
 CFADim CFAGroup::addDim(std::string name, cfa_type type, int dimLen)
 {
     return dims.emplace_back(id, name, dimLen, type);
