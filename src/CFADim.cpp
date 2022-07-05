@@ -1,4 +1,4 @@
-#include "CFADim.h"
+#include "CFADim.hpp"
 
 CFADim::CFADim(int parentId, int dimId)
 {

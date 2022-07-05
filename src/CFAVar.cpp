@@ -1,4 +1,4 @@
-#include "CFAVar.h"
+#include "CFAVar.hpp"
 #include <stdexcept>
 
 CFAVar::CFAVar(int parentId, int varId)

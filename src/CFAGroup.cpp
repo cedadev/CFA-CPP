@@ -1,4 +1,4 @@
-#include "CFAGroup.h"
+#include "CFAGroup.hpp"
 #include <stdexcept>
 
 CFAGroup::CFAGroup(std::string name) 

@@ -1,4 +1,4 @@
-#include "CFAFile.h"
+#include "CFAFile.hpp"
 #include <stdexcept>
 
 CFAFile::CFAFile(std::string path)
