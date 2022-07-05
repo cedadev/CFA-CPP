@@ -89,22 +89,38 @@ CFAVar CFAGroup::addVar(std::string name, cfa_type type)
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, int dimId)
 {
-    throw std::runtime_error("Not Implemented");
+    vars.emplace_back(id, name, type);
+    int cfaErr = vars.back().updateDims(dimId);
+    if(cfaErr)
+        throw (cfaErr);
+    return vars.back();
 }
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::string dimName)
 {
-    return vars.emplace_back(id, name, type);
+    vars.emplace_back(id, name, type);
+    int cfaErr = vars.back().updateDims(dimName);
+    if(cfaErr)
+        throw (cfaErr);
+    return vars.back();
 }
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<int> dimIds)
 {
-    return vars.emplace_back(id, name, type);
+    vars.emplace_back(id, name, type);    
+    int cfaErr = vars.back().updateDims(dimIds);
+    if(cfaErr)
+        throw (cfaErr);
+    return vars.back();
 }
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<std::string> dimNames)
 {
-    return vars.emplace_back(id, name, type);
+    vars.emplace_back(id, name, type);    
+    int cfaErr = vars.back().updateDims(dimNames);
+    if(cfaErr)
+        throw (cfaErr);
+    return vars.back();
 }
 
 CFADim CFAGroup::getDim(int id)

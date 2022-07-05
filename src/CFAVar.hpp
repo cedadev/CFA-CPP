@@ -26,6 +26,11 @@ class CFAVar
         std::string getName();
         cfa_type getType();
         CFADim getDim(int i);
+
+        int updateDims(int dimId);
+        int updateDims(std::vector<int> dimIds);
+        int updateDims(std::string dimName);
+        int updateDims(std::vector<std::string> dimNames);
     private:
         AggregationVariable* getAggVar();
         std::vector<CFADim> getDims();

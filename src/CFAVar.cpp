@@ -39,6 +39,40 @@ CFADim CFAVar::getDim(int i)
     return CFADim(parentId, getAggVar()->cfa_dim_idp[i]);
 }
 
+int CFAVar::updateDims(int dimId)
+{
+    std::vector<int> dimIds = {dimId};
+    return updateDims(dimIds);
+}
+
+int CFAVar::updateDims(std::vector<int> dimIds)
+{
+    int cfaErr = cfa_var_def_dims(parentId, id, getDimCount(), dimIds.data());
+    if (cfaErr)
+        return (cfaErr);
+    return 0;
+}
+
+int CFAVar::updateDims(std::string dimName)
+{
+    std::vector<std::string> dimNames = {dimName};
+    return updateDims(dimNames);
+}
+
+int CFAVar::updateDims(std::vector<std::string> dimNames)
+{
+    std::vector<int> dimIds;
+    for(std::string dimName : dimNames)
+    {
+        int dimId;
+        int cfaErr = cfa_inq_dim_id(id, dimName.c_str(), &dimId);
+        if (cfaErr)
+            return (cfaErr);
+        dimIds.emplace_back(dimId);
+    }
+    return updateDims(dimIds);
+}
+
 AggregationVariable* CFAVar::getAggVar()
 {
     AggregationVariable *aggVar;
