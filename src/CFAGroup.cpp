@@ -40,6 +40,7 @@ CFAGroup CFAGroup::getParentGroup()
 
 CFAGroup CFAGroup::getGroup(int id) 
 {  
+    throw std::runtime_error("Not implemented");
     auto it = std::find_if(groups.begin(), groups.end(), [id](CFAGroup& group) { return group.getId() == id; });
     if(it != groups.end())
         return *it;
@@ -49,6 +50,7 @@ CFAGroup CFAGroup::getGroup(int id)
 
 CFAGroup CFAGroup::getGroup(std::string name) 
 {  
+    throw std::runtime_error("Not implemented");
     auto it = std::find_if(groups.begin(), groups.end(), [name](CFAGroup& group) { return group.getName() == name; });
     if(it != groups.end())
         return *it;
@@ -58,6 +60,7 @@ CFAGroup CFAGroup::getGroup(std::string name)
 
 CFAGroup CFAGroup::addGroup(std::string name)
 {
+    throw std::runtime_error("Not implemented");
     int cfaErr = cfa_def_cont(this->id, name.c_str(), &id);
     if (cfaErr)
         throw (cfaErr);
@@ -66,6 +69,7 @@ CFAGroup CFAGroup::addGroup(std::string name)
 
 CFAVar CFAGroup::getVar(int id) 
 { 
+    throw std::runtime_error("Not implemented");
     auto it = std::find_if(vars.begin(), vars.end(), [id](CFAVar& var) { return var.getId() == id; });
     if(it != vars.end())
         return *it;
@@ -75,6 +79,7 @@ CFAVar CFAGroup::getVar(int id)
 
 CFAVar CFAGroup::getVar(std::string name) 
 {  
+    throw std::runtime_error("Not implemented");
     auto it = std::find_if(vars.begin(), vars.end(), [name](CFAVar& var) { return var.getName() == name; });
     if(it != vars.end())
         return *it;
@@ -125,6 +130,7 @@ CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<std::string
 
 CFADim CFAGroup::getDim(int id)
 {
+    throw std::runtime_error("Not implemented");
     auto it = std::find_if(dims.begin(), dims.end(), [id](CFADim& dim) { return dim.getId() == id; });
     if(it != dims.end())
         return *it;
@@ -134,6 +140,7 @@ CFADim CFAGroup::getDim(int id)
 
 CFADim CFAGroup::getDim(std::string name)
 {
+    throw std::runtime_error("Not implemented");
     auto it = std::find_if(dims.begin(), dims.end(), [name](CFADim& dim) { return dim.getName() == name; });
     if(it != dims.end())
         return *it;
