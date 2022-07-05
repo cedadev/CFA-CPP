@@ -20,7 +20,7 @@ class CFAVar
 
         std::vector<CFADim> dims;
     public:
-        CFAVar(int parentId, int varId);
+        CFAVar(int parentId, int varId = -1);
         CFAVar(int parentId, std::string name, cfa_type type);
         
         int getId();

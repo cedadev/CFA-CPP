@@ -1,4 +1,5 @@
 #include "CFAVar.h"
+#include <stdexcept>
 
 CFAVar::CFAVar(int parentId, int varId)
 {
@@ -6,9 +7,8 @@ CFAVar::CFAVar(int parentId, int varId)
     this->id = varId;
 }
 
-CFAVar::CFAVar(int parentId, std::string name, cfa_type type)
+CFAVar::CFAVar(int parentId, std::string name, cfa_type type) : CFAVar(parentId)
 {
-    this->parentId = parentId;
     int cfaErr = cfa_def_var(parentId, name.c_str(), type, &id);
     if (cfaErr)
         throw (cfaErr);
@@ -43,19 +43,23 @@ cfa_type CFAVar::getType()
 }
 
 CFADim CFAVar::getDim(int i) 
-{    
-    return dims[i];
+{
+    throw std::runtime_error("Not Implemented!");
+    //return CFADim(parentId, dims[i]);
+    //return dims[i];
 }
 
 std::vector<CFADim> CFAVar::getDims() 
 { 
-    return dims; 
+    throw std::runtime_error("Not implemented");
+    //return dims; 
 }
 
 std::vector<std::string> CFAVar::getDimNames()
 {
-    std::vector<std::string> dimNames;
+    throw std::runtime_error("Not implemented");
+    /*std::vector<std::string> dimNames;
     for(auto dim : dims)
         dimNames.push_back(dim.getName());
-    return dimNames;
+    return dimNames;*/
 }

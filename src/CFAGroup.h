@@ -41,9 +41,10 @@ class CFAGroup
         CFAVar getVar(int id);
         CFAVar getVar(std::string name);
         CFAVar addVar(std::string name, cfa_type type);
+        CFAVar addVar(std::string name, cfa_type type, int dimId);
         CFAVar addVar(std::string name, cfa_type type, std::string dimName);
+        CFAVar addVar(std::string name, cfa_type type, std::vector<int> dimIds);
         CFAVar addVar(std::string name, cfa_type type, std::vector<std::string> dimNames);
-        CFAVar addVar(std::string name, std::vector<int> dimIds);
 
         CFADim getDim(int id);
         CFADim getDim(std::string name);
