@@ -1,19 +1,13 @@
 #include "CFADim.h"
 
-CFADim::CFADim(int parentId, int dimId)
+CFADim::CFADim(int parentId, int dimId = -1)
 {
     this->parentId = parentId;
     this->id = dimId;
 }
 
-CFADim::CFADim(int parentId, std::string name, cfa_type type) : CFADim(parentId, name, 1, type)
+CFADim::CFADim(int parentId, std::string name, cfa_type type, int dimLen = 1) : CFADim(parentId)
 {
-    
-}
-
-CFADim::CFADim(int parentId, std::string name, int dimLen, cfa_type type)
-{
-    this->parentId = parentId;
     int cfaErr = cfa_def_dim(parentId, name.c_str(), dimLen, type, &id);
     if (cfaErr)
         throw (cfaErr);

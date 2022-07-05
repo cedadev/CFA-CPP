@@ -14,8 +14,7 @@ class CFADim
         int parentId;
     public:
         CFADim(int parentId, int dimId);
-        CFADim(int parentId, std::string name, cfa_type type);
-        CFADim(int parentId, std::string name, int dimLen, cfa_type type);
+        CFADim(int parentId, std::string name, cfa_type type, int dimLen);
         
         int getId();
         int getLen();
