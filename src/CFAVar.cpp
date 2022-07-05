@@ -21,45 +21,39 @@ int CFAVar::getId()
 
 int CFAVar::getDimCount() 
 {
-    return dims.size(); 
+    return getAggVar()->cfa_ndim; 
 }
 
 std::string CFAVar::getName() 
 {
-    AggregationVariable *aggVar;
-    int cfaErr = cfa_get_var(parentId, id, &aggVar);
-    if (cfaErr)
-        throw (cfaErr);
-    return aggVar->name; 
+    return getAggVar()->name; 
 }
 
 cfa_type CFAVar::getType() 
 { 
-    AggregationVariable *aggVar;
-    int cfaErr = cfa_get_var(parentId, id, &aggVar);
-    if (cfaErr)
-        throw (cfaErr);
-    return aggVar->cfa_dtype.type; 
+    return getAggVar()->cfa_dtype.type; 
 }
 
 CFADim CFAVar::getDim(int i) 
 {
-    throw std::runtime_error("Not Implemented!");
-    //return CFADim(parentId, dims[i]);
-    //return dims[i];
+    return CFADim(parentId, getAggVar()->cfa_dim_idp[i]);
+}
+
+AggregationVariable* CFAVar::getAggVar()
+{
+    AggregationVariable *aggVar;
+    int cfaErr = cfa_get_var(parentId, id, &aggVar);
+    if (cfaErr)
+        throw (cfaErr);
+    return aggVar;
 }
 
 std::vector<CFADim> CFAVar::getDims() 
-{ 
+{
     throw std::runtime_error("Not implemented");
-    //return dims; 
 }
 
 std::vector<std::string> CFAVar::getDimNames()
 {
     throw std::runtime_error("Not implemented");
-    /*std::vector<std::string> dimNames;
-    for(auto dim : dims)
-        dimNames.push_back(dim.getName());
-    return dimNames;*/
 }
