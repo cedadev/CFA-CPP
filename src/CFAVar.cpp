@@ -89,6 +89,7 @@ std::vector<std::string> CFAVar::getDimNames()
     std::vector<std::string> dimNames;
     std::vector<CFADim> dims = getDims();
     std::transform(dims.begin(), dims.end(), dimNames.begin(), [](CFADim dim) { return dim.getName(); });
+    return dimNames;
 }
 
 AggregationVariable* CFAVar::getAggVar()
