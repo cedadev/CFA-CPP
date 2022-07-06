@@ -1,5 +1,6 @@
 #include "CFAVar.hpp"
 #include <stdexcept>
+#include <algorithm>
 
 CFAVar::CFAVar(int parentId, int varId)
 {
@@ -73,6 +74,23 @@ int CFAVar::updateDims(std::vector<std::string> dimNames)
     return updateDims(dimIds);
 }
 
+std::vector<CFADim> CFAVar::getDims() 
+{
+    std::vector<CFADim> dims;
+    int dimCount = getAggVar()->cfa_ndim;
+    int *dimIds = getAggVar()->cfa_dim_idp;
+    for(int i = 0; i < dimCount; i++)
+        dims.emplace_back(parentId, dimIds[i]);
+    return dims;
+}
+
+std::vector<std::string> CFAVar::getDimNames()
+{   
+    std::vector<std::string> dimNames;
+    std::vector<CFADim> dims = getDims();
+    std::transform(dims.begin(), dims.end(), dimNames.begin(), [](CFADim dim) { return dim.getName(); });
+}
+
 AggregationVariable* CFAVar::getAggVar()
 {
     AggregationVariable *aggVar;
@@ -80,14 +98,4 @@ AggregationVariable* CFAVar::getAggVar()
     if (cfaErr)
         throw (cfaErr);
     return aggVar;
-}
-
-std::vector<CFADim> CFAVar::getDims() 
-{
-    throw std::runtime_error("Not implemented");
-}
-
-std::vector<std::string> CFAVar::getDimNames()
-{
-    throw std::runtime_error("Not implemented");
 }
