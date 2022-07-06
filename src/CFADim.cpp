@@ -19,28 +19,25 @@ int CFADim::getId()
 }
 
 int CFADim::getLen() 
-{ 
-    AggregatedDimension *aggDim;
-    int cfaErr = cfa_get_dim(parentId, id, &aggDim);
-    if (cfaErr)
-        throw (cfaErr);
-    return aggDim->length; 
+{
+    return getAggDim()->length; 
 }
 
 std::string CFADim::getName() 
+{
+    return getAggDim()->name; 
+}
+
+cfa_type CFADim::getType()
+{
+    return getAggDim()->cfa_dtype.type;
+}
+
+AggregatedDimension* CFADim::getAggDim()
 {
     AggregatedDimension *aggDim;
     int cfaErr = cfa_get_dim(parentId, id, &aggDim);
     if (cfaErr)
         throw (cfaErr);
-    return aggDim->name; 
-}
-
-cfa_type CFADim::getType()
-{ 
-    AggregatedDimension *aggDim;
-    int cfaErr = cfa_get_dim(parentId, id, &aggDim);
-    if (cfaErr)
-        throw (cfaErr);
-    return aggDim->cfa_dtype.type; 
+    return aggDim;
 }

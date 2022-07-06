@@ -17,6 +17,8 @@ class CFAVar
     private:
         int id;
         int parentId;
+        
+        AggregationVariable* getAggVar();
     public:
         CFAVar(int parentId, int varId = -1);
         CFAVar(int parentId, std::string name, cfa_type type);
@@ -35,6 +37,4 @@ class CFAVar
         
         std::vector<CFADim> getDims();
         std::vector<std::string> getDimNames();
-    private:
-        AggregationVariable* getAggVar();
 };

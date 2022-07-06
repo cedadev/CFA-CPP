@@ -12,6 +12,8 @@ class CFADim
     private:
         int id;
         int parentId;
+
+        AggregatedDimension* getAggDim();
     public:
         CFADim(int parentId, int dimId = -1);
         CFADim(int parentId, std::string name, cfa_type type, int dimLen = 1);
