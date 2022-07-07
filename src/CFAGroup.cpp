@@ -8,6 +8,12 @@ CFAGroup::CFAGroup(std::string name)
     this->parent = nullptr;
 }
 
+CFAGroup::CFAGroup(int parentId, int grpId)
+{
+    this->id = grpId;
+    this->parentId = parentId;
+}
+
 std::string CFAGroup::getName() 
 { 
     return name; 
@@ -20,22 +26,17 @@ int CFAGroup::getId()
 
 int CFAGroup::getVarCount() 
 { 
-    return vars.size(); 
+    return getAggCont()->n_vars;
 }
 
 int CFAGroup::getDimCount() 
 { 
-    return dims.size(); 
+    return getAggCont()->n_dims; 
 }
 
 int CFAGroup::getGroupCount() 
 { 
-    return groups.size(); 
-}
-
-CFAGroup CFAGroup::getParentGroup() 
-{ 
-    return *parent; 
+    return getAggCont()->n_conts; 
 }
 
 CFAGroup CFAGroup::getGroup(int id) 
@@ -156,4 +157,13 @@ CFADim CFAGroup::addDim(std::string name, cfa_type type)
 CFADim CFAGroup::addDim(std::string name, cfa_type type, int dimLen)
 {
     return dims.emplace_back(id, name, type, dimLen);
+}
+
+AggregationContainer* CFAGroup::getAggCont()
+{
+    AggregationContainer *aggCont;
+    int cfaErr = cfa_get_cont(parentId, id, &aggCont);
+    if (cfaErr)
+        throw (cfaErr);
+    return aggCont;
 }
