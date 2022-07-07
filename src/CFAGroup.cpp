@@ -61,8 +61,7 @@ CFAGroup CFAGroup::getGroup(std::string name)
 
 CFAGroup CFAGroup::addGroup(std::string name)
 {
-    throw std::runtime_error("Not implemented");
-    int cfaErr = cfa_def_cont(this->id, name.c_str(), &id);
+    int cfaErr = cfa_def_cont(parentId, name.c_str(), &id);
     if (cfaErr)
         throw (cfaErr);
     return groups.emplace_back(name);
