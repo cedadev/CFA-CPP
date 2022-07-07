@@ -64,7 +64,7 @@ CFAGroup CFAGroup::addGroup(std::string name)
     int cfaErr = cfa_def_cont(parentId, name.c_str(), &id);
     if (cfaErr)
         throw (cfaErr);
-    return groups.emplace_back(name);
+    return CFAGroup(parentId, id);
 }
 
 CFAVar CFAGroup::getVar(int id) 
