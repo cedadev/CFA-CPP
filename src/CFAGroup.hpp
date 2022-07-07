@@ -17,16 +17,10 @@ class CFAGroup
     protected:
         int id;
         int parentId;
-        std::string name;
-
-        CFAGroup* parent;
-        std::vector<CFAVar> vars;
-        std::vector<CFADim> dims;
-        std::vector<CFAGroup> groups;
 
         AggregationContainer* getAggCont();
     public:
-        CFAGroup(std::string name);
+        CFAGroup(int parentId, std::string name);
         CFAGroup(int parentId = -1, int grpId = -1);
         
         int getId();

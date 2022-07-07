@@ -1,27 +1,27 @@
 #include "CFAGroup.hpp"
 #include <stdexcept>
 
-CFAGroup::CFAGroup(std::string name) 
-{ 
-    this->id = -1;
-    this->name = name;
-    this->parent = nullptr;
-}
-
 CFAGroup::CFAGroup(int parentId, int grpId)
 {
     this->id = grpId;
     this->parentId = parentId;
 }
 
-std::string CFAGroup::getName() 
+CFAGroup::CFAGroup(int parentId, std::string name) : CFAGroup(parentId)
 { 
-    return name; 
+    int cfaErr = cfa_def_cont(parentId, name.c_str(), &id);
+    if (cfaErr)
+        throw (cfaErr);
 }
 
 int CFAGroup::getId() 
 { 
     return id; 
+}
+
+std::string CFAGroup::getName() 
+{ 
+    return getAggCont()->name; 
 }
 
 int CFAGroup::getVarCount() 
@@ -50,10 +50,7 @@ CFAGroup CFAGroup::getGroup(std::string name)
 
 CFAGroup CFAGroup::addGroup(std::string name)
 {
-    int cfaErr = cfa_def_cont(parentId, name.c_str(), &id);
-    if (cfaErr)
-        throw (cfaErr);
-    return CFAGroup(parentId, id);
+    return CFAGroup(parentId, name);
 }
 
 CFAVar CFAGroup::getVar(std::string name) 
