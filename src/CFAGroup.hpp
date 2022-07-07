@@ -26,9 +26,8 @@ class CFAGroup
 
         AggregationContainer* getAggCont();
     public:
-        CFAGroup();
         CFAGroup(std::string name);
-        CFAGroup(int parentId, int grpId = -1);
+        CFAGroup(int parentId = -1, int grpId = -1);
         
         int getId();
         std::string getName();
@@ -37,11 +36,9 @@ class CFAGroup
         int getDimCount();
         int getGroupCount();
 
-        CFAGroup getGroup(int id);
         CFAGroup getGroup(std::string name);
         CFAGroup addGroup(std::string name);
 
-        CFAVar getVar(int id);
         CFAVar getVar(std::string name);
         CFAVar addVar(std::string name, cfa_type type);
         CFAVar addVar(std::string name, cfa_type type, int dimId);
@@ -49,7 +46,6 @@ class CFAGroup
         CFAVar addVar(std::string name, cfa_type type, std::vector<int> dimIds);
         CFAVar addVar(std::string name, cfa_type type, std::vector<std::string> dimNames);
 
-        CFADim getDim(int id);
         CFADim getDim(std::string name);
         CFADim addDim(std::string name, cfa_type type);
         CFADim addDim(std::string name, cfa_type type, int dimLen);
