@@ -89,43 +89,43 @@ CFAVar CFAGroup::getVar(std::string name)
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type)
 {
-    return vars.emplace_back(id, name, type);
+    return CFAVar(id, name, type);
 }
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, int dimId)
 {
-    vars.emplace_back(id, name, type);
-    int cfaErr = vars.back().updateDims(dimId);
+    CFAVar cfaVar(id, name, type);
+    int cfaErr = cfaVar.updateDims(dimId);
     if(cfaErr)
         throw (cfaErr);
-    return vars.back();
+    return cfaVar;
 }
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::string dimName)
 {
-    vars.emplace_back(id, name, type);
-    int cfaErr = vars.back().updateDims(dimName);
+    CFAVar cfaVar(id, name, type);
+    int cfaErr = cfaVar.updateDims(dimName);
     if(cfaErr)
         throw (cfaErr);
-    return vars.back();
+    return cfaVar;
 }
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<int> dimIds)
 {
-    vars.emplace_back(id, name, type);    
-    int cfaErr = vars.back().updateDims(dimIds);
+    CFAVar cfaVar(id, name, type);    
+    int cfaErr = cfaVar.updateDims(dimIds);
     if(cfaErr)
         throw (cfaErr);
-    return vars.back();
+    return cfaVar;
 }
 
 CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<std::string> dimNames)
 {
-    vars.emplace_back(id, name, type);    
-    int cfaErr = vars.back().updateDims(dimNames);
+    CFAVar cfaVar(id, name, type);    
+    int cfaErr = cfaVar.updateDims(dimNames);
     if(cfaErr)
         throw (cfaErr);
-    return vars.back();
+    return cfaVar;
 }
 
 CFADim CFAGroup::getDim(int id)
