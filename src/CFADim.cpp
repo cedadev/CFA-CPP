@@ -2,8 +2,8 @@
 
 CFADim::CFADim(int parentId, int dimId)
 {
-    this->parentId = parentId;
     this->id = dimId;
+    this->parentId = parentId;
 }
 
 CFADim::CFADim(int parentId, std::string name, cfa_type type, int dimLen) : CFADim(parentId)

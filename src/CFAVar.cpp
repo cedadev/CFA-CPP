@@ -4,8 +4,8 @@
 
 CFAVar::CFAVar(int parentId, int varId)
 {
-    this->parentId = parentId;
     this->id = varId;
+    this->parentId = parentId;
 }
 
 CFAVar::CFAVar(int parentId, std::string name, cfa_type type) : CFAVar(parentId)
