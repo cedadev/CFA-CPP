@@ -2,7 +2,7 @@
 
 enum CFAFileMode 
 {
-    READ,
-    WRITE,
-    REPLACE
+    Read,
+    Write,
+    Replace
 };

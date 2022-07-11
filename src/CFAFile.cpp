@@ -1,17 +1,10 @@
 #include "CFAFile.hpp"
 #include <stdexcept>
 
-CFAFile::CFAFile(std::string path)
-{
-    /* Have an enum for file format */
-    int cfa_err = cfa_create(path.c_str(), CFA_NETCDF, &id);
-    if (cfa_err)
-        throw std::runtime_error("Stop!");
-}
-CFAFile::CFAFile(std::string path, CFAFileFormat format, CFAFileMode mode)
+CFAFile::CFAFile(std::string path, CFACpp::CFAFileFormat format, CFAFileMode mode)
 {
     this->mode = mode;
-    int cfa_err = cfa_create(path.c_str(), format, &id);
+    int cfa_err = cfa_create(path.c_str(), (CFAFileFormat)format, &id);
     if(cfa_err)
         throw std::runtime_error("Stop!");
 }

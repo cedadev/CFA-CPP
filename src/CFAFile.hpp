@@ -4,11 +4,7 @@
 
 #include "CFAGroup.hpp"
 #include "CFAFileMode.hpp"
-
-// declare CFA-C library as external C library
-extern "C" {
-    #include "cfa.h"
-}
+#include "CFAFileFormat.hpp"
 
 class CFAFile : CFAGroup
 {
@@ -17,8 +13,7 @@ class CFAFile : CFAGroup
         CFAFileMode mode;
         CFAFileFormat format;
     public:
-        CFAFile(std::string path);
-        CFAFile(std::string path, CFAFileFormat format, CFAFileMode mode = CFAFileMode::READ);
+        CFAFile(std::string path, CFACpp::CFAFileFormat format = CFACpp::CFAFileFormat::CFANetCDF, CFAFileMode mode = CFAFileMode::Read);
 
         void open(std::string path, CFAFileFormat format);
         void create(std::string path, CFAFileFormat format);
