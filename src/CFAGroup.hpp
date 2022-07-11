@@ -28,10 +28,10 @@ class CFAGroup
 
         int getVarCount();
         int getDimCount();
-        int getGroupCount();
+        int getGrpCount();
 
-        CFAGroup getGroup(std::string name);
-        CFAGroup addGroup(std::string name);
+        CFAGroup getGrp(std::string name);
+        CFAGroup addGrp(std::string name);
 
         CFAVar getVar(std::string name);
         CFAVar addVar(std::string name, cfa_type type);
