@@ -4,8 +4,8 @@
 class CFAException : std::exception
 {
     private:
-        char *message;
+        std::string message;
     public:
-        CFAException(char *message);
-        char *what();
+        CFAException(int errorCode);
+        const char *what();
 };

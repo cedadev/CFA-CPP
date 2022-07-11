@@ -1,11 +1,12 @@
 #include "CFAException.hpp"
 
-CFAException::CFAException(char *message) : message(message) 
+CFAException::CFAException(int errorCode) 
 {
-
+    message = "Generic CFA Exception with code: ";
+    message.append(std::to_string(errorCode));
 }
 
-char *CFAException::what() 
+const char *CFAException::what() 
 {
-    return message;
+    return message.c_str();
 }
