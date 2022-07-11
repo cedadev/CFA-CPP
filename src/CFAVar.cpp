@@ -1,5 +1,6 @@
 #include "CFAVar.hpp"
-#include <stdexcept>
+#include "CFAException.hpp"
+
 #include <algorithm>
 
 CFAVar::CFAVar(int parentId, int varId)
@@ -12,7 +13,7 @@ CFAVar::CFAVar(int parentId, std::string name, cfa_type type) : CFAVar(parentId)
 {
     int cfaErr = cfa_def_var(parentId, name.c_str(), type, &id);
     if (cfaErr)
-        throw (cfaErr);
+        throw CFAException(cfaErr);
 }
         
 int CFAVar::getId() 
@@ -97,6 +98,6 @@ AggregationVariable* CFAVar::getAggVar()
     AggregationVariable *aggVar;
     int cfaErr = cfa_get_var(parentId, id, &aggVar);
     if (cfaErr)
-        throw (cfaErr);
+        throw CFAException(cfaErr);
     return aggVar;
 }

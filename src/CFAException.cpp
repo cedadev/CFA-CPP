@@ -2,7 +2,7 @@
 
 CFAException::CFAException(int errorCode) 
 {
-    message = "Generic CFA Exception with code: ";
+    message = "Generic CFA Exception: ";
     message.append(std::to_string(errorCode));
 }
 

@@ -1,4 +1,5 @@
 #include "CFADim.hpp"
+#include "CFAException.hpp"
 
 CFADim::CFADim(int parentId, int dimId)
 {
@@ -9,8 +10,8 @@ CFADim::CFADim(int parentId, int dimId)
 CFADim::CFADim(int parentId, std::string name, cfa_type type, int dimLen) : CFADim(parentId)
 {
     int cfaErr = cfa_def_dim(parentId, name.c_str(), dimLen, type, &id);
-    if (cfaErr)
-        throw (cfaErr);
+    if (cfaErr)        
+        throw CFAException(cfaErr);
 }
 
 int CFADim::getId() 
@@ -38,6 +39,6 @@ AggregatedDimension* CFADim::getAggDim()
     AggregatedDimension *aggDim;
     int cfaErr = cfa_get_dim(parentId, id, &aggDim);
     if (cfaErr)
-        throw (cfaErr);
+        throw CFAException(cfaErr);
     return aggDim;
 }

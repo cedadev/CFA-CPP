@@ -1,35 +1,35 @@
 #include "CFAFile.hpp"
-#include <stdexcept>
+#include "CFAException.hpp"
 
 CFAFile::CFAFile(std::string path, CFACpp::CFAFileFormat format, CFAFileMode mode)
 {
     this->mode = mode;
-    int cfa_err = cfa_create(path.c_str(), (CFAFileFormat)format, &id);
-    if(cfa_err)
-        throw std::runtime_error("Stop!");
+    int cfaErr = cfa_create(path.c_str(), (CFAFileFormat)format, &id);
+    if(cfaErr)
+        throw CFAException(cfaErr);
 }
 
 void CFAFile::open(std::string path, CFAFileFormat format)
 {
-    int cfa_err = cfa_load(path.c_str(), format, &id);
-    if(cfa_err)
-        throw std::runtime_error("Stop!");
+    int cfaErr = cfa_load(path.c_str(), format, &id);
+    if(cfaErr)
+        throw CFAException(cfaErr);
 }
 void CFAFile::create(std::string path, CFAFileFormat format)
 {
-    int cfa_err = cfa_create(path.c_str(), format, &id);
-    if(cfa_err)
-        throw std::runtime_error("Stop!");
+    int cfaErr = cfa_create(path.c_str(), format, &id);
+    if(cfaErr)
+        throw CFAException(cfaErr);
 }
 void CFAFile::enddef()
 {
-    int cfa_err = cfa_serialise(id);
-    if(cfa_err)
-        throw std::runtime_error("Stop!");
+    int cfaErr = cfa_serialise(id);
+    if(cfaErr)
+        throw CFAException(cfaErr);
 }
 void CFAFile::close()
 {
-    int cfa_err = cfa_close(id);
-    if(cfa_err)
-        throw std::runtime_error("Stop!");
+    int cfaErr = cfa_close(id);
+    if(cfaErr)
+        throw CFAException(cfaErr);
 }
