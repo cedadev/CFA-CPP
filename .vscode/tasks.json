@@ -23,6 +23,11 @@
             "command": "make",
             "args": ["example1"],
         },
+        {
+            "label": "build_test_cfa_dim",
+            "command": "make",
+            "args": ["test_cfa_dim"],
+        }
     ],
     "version": "2.0.0"
 }

@@ -55,6 +55,9 @@ $(CFA_CPP_LIB) : $(CFA_CPP_SRC) $(LIB_DIR)
 example% : $(TST_SRC_DIR)/examples/example%.cpp $(CFA_CPP_LIB) $(BLD_EX_DIR) $(TST_EX_OUT_DIR)
 	$(CC) $(CFLAGS) $(DEBUGFLAGS) $(LFLAGS) $< -o $(BLD_DIR)/examples/$@
 
+test_cfa% : $(TST_SRC_DIR)/test_cfa%.cpp $(CFA_CPP_LIB) $(BLD_DIR) $(TST_EX_OUT_DIR)
+	$(CC) $(CFLAGS) $(DEBUGFLAGS) $(LFLAGS) $< -o $(BLD_DIR)/$@
+
 clean:
 	rm -r $(LIB_DIR)/*
 	rm -r $(BLD_DIR)/*

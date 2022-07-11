@@ -23,5 +23,25 @@
             },
             "preLaunchTask": "build_example1",
         },
+
+        {
+            "name": "test_cfa_dim",
+            "program": "${workspaceRoot}/build/test_cfa_dim",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "targetArchitecture": "x64",
+            "osx": {
+                "MIMode": "lldb",
+                "environment": [{"name" : "DYLD_LIBRARY_PATH",
+                    "value" : "$DYLD_LIBRARY_PATH:../CFA-C/lib"}]
+            },
+            "linux": {
+                "MIMode": "gdb",
+                "environment": [{"name" : "LD_LIBRARY_PATH",
+                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}]
+            },
+            "preLaunchTask": "build_test_cfa_dim",
+        },
     ],
 }
