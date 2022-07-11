@@ -7,7 +7,7 @@ CFAGroup::CFAGroup(int parentId, int grpId)
     this->parentId = parentId;
 }
 
-CFAGroup::CFAGroup(int parentId, std::string name) : CFAGroup(parentId)
+CFAGroup::CFAGroup(std::string name, int parentId) : CFAGroup(parentId)
 { 
     int cfaErr = cfa_def_cont(parentId, name.c_str(), &id);
     if (cfaErr)
@@ -50,7 +50,7 @@ CFAGroup CFAGroup::getGroup(std::string name)
 
 CFAGroup CFAGroup::addGroup(std::string name)
 {
-    return CFAGroup(parentId, name);
+    return CFAGroup(name, parentId);
 }
 
 CFAVar CFAGroup::getVar(std::string name) 
