@@ -27,6 +27,21 @@
             "label": "build_test_cfa_dim",
             "command": "make",
             "args": ["test_cfa_dim"],
+        },
+        {
+            "label": "build_test_cfa_file",
+            "command": "make",
+            "args": ["test_cfa_dim"],
+        },
+        {
+            "label": "build_test_cfa_group",
+            "command": "make",
+            "args": ["test_cfa_dim"],
+        },
+        {
+            "label": "build_test_cfa_var",
+            "command": "make",
+            "args": ["test_cfa_dim"],
         }
     ],
     "version": "2.0.0"
