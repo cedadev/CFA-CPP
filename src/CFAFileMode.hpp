@@ -1,8 +1,11 @@
 #pragma once
 
-enum CFAFileMode 
+namespace CFA
 {
-    Read,
-    Write,
-    Replace
-};
+    enum FileMode 
+    {
+        Read,
+        Write,
+        Replace
+    };
+}

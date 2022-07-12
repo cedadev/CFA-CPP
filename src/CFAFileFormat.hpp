@@ -2,9 +2,9 @@
 
 #include "cfa.h"
 
-namespace CFACpp
+namespace CFA
 {
-    enum CFAFileFormat
+    enum FileFormat
     {
         CFAUnknown = CFA_UNKNOWN,
         CFANetCDF = CFA_NETCDF

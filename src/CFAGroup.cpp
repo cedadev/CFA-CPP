@@ -1,132 +1,132 @@
 #include "CFAGroup.hpp"
 #include "CFAException.hpp"
 
-CFAGroup::CFAGroup(int parentId, int grpId)
+CFA::Group::Group(int parentId, int grpId)
 {
     this->id = grpId;
     this->parentId = parentId;
 }
 
-CFAGroup::CFAGroup(int parentId, std::string name) : CFAGroup(parentId)
+CFA::Group::Group(int parentId, std::string name) : Group(parentId)
 { 
     int cfaErr = cfa_def_cont(parentId, name.c_str(), &id);
     if (cfaErr)
-        throw CFAException(cfaErr);
+        throw Exception(cfaErr);
 }
 
-int CFAGroup::getId() 
+int CFA::Group::getId() 
 { 
     return id; 
 }
 
-std::string CFAGroup::getName() 
+std::string CFA::Group::getName() 
 { 
     return getAggCont()->name; 
 }
 
-int CFAGroup::getVarCount() 
+int CFA::Group::getVarCount() 
 { 
     return getAggCont()->n_vars;
 }
 
-int CFAGroup::getDimCount() 
+int CFA::Group::getDimCount() 
 { 
     return getAggCont()->n_dims; 
 }
 
-int CFAGroup::getGrpCount() 
+int CFA::Group::getGrpCount() 
 { 
     return getAggCont()->n_conts; 
 }
 
-CFAGroup CFAGroup::getGrp(std::string name) 
+CFA::Group CFA::Group::getGrp(std::string name) 
 {
     int grpId;
     int cfaErr = cfa_inq_cont_id(id, name.c_str(), &grpId);
     if (cfaErr)
-        throw CFAException(cfaErr);
-    return CFAGroup(id, grpId);
+        throw Exception(cfaErr);
+    return Group(id, grpId);
 }
 
-CFAGroup CFAGroup::addGrp(std::string name)
+CFA::Group CFA::Group::addGrp(std::string name)
 {
-    return CFAGroup(parentId, name);
+    return Group(parentId, name);
 }
 
-CFAVar CFAGroup::getVar(std::string name) 
+CFA::Var CFA::Group::getVar(std::string name) 
 {    
     int varId;
     int cfaErr = cfa_inq_var_id(id, name.c_str(), &varId);
     if (cfaErr)
-        throw CFAException(cfaErr);
-    return CFAVar(id, varId);
+        throw Exception(cfaErr);
+    return CFA::Var(id, varId);
 }
 
-CFAVar CFAGroup::addVar(std::string name, cfa_type type)
+CFA::Var CFA::Group::addVar(std::string name, cfa_type type)
 {
-    return CFAVar(id, name, type);
+    return CFA::Var(id, name, type);
 }
 
-CFAVar CFAGroup::addVar(std::string name, cfa_type type, int dimId)
+CFA::Var CFA::Group::addVar(std::string name, cfa_type type, int dimId)
 {
-    CFAVar cfaVar(id, name, type);
-    int cfaErr = cfaVar.updateDims(dimId);
+    CFA::Var Var(id, name, type);
+    int cfaErr = Var.updateDims(dimId);
     if(cfaErr)
-        throw CFAException(cfaErr);
-    return cfaVar;
+        throw Exception(cfaErr);
+    return Var;
 }
 
-CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::string dimName)
+CFA::Var CFA::Group::addVar(std::string name, cfa_type type, std::string dimName)
 {
-    CFAVar cfaVar(id, name, type);
-    int cfaErr = cfaVar.updateDims(dimName);
+    CFA::Var Var(id, name, type);
+    int cfaErr = Var.updateDims(dimName);
     if(cfaErr)
-        throw CFAException(cfaErr);
-    return cfaVar;
+        throw Exception(cfaErr);
+    return Var;
 }
 
-CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<int> dimIds)
+CFA::Var CFA::Group::addVar(std::string name, cfa_type type, std::vector<int> dimIds)
 {
-    CFAVar cfaVar(id, name, type);    
-    int cfaErr = cfaVar.updateDims(dimIds);
+    CFA::Var Var(id, name, type);    
+    int cfaErr = Var.updateDims(dimIds);
     if(cfaErr)
-        throw CFAException(cfaErr);
-    return cfaVar;
+        throw Exception(cfaErr);
+    return Var;
 }
 
-CFAVar CFAGroup::addVar(std::string name, cfa_type type, std::vector<std::string> dimNames)
+CFA::Var CFA::Group::addVar(std::string name, cfa_type type, std::vector<std::string> dimNames)
 {
-    CFAVar cfaVar(id, name, type);    
-    int cfaErr = cfaVar.updateDims(dimNames);
+    CFA::Var Var(id, name, type);    
+    int cfaErr = Var.updateDims(dimNames);
     if(cfaErr)
-        throw CFAException(cfaErr);
-    return cfaVar;
+        throw Exception(cfaErr);
+    return Var;
 }
 
-CFADim CFAGroup::getDim(std::string name)
+CFA::Dim CFA::Group::getDim(std::string name)
 {
     int dimId;
     int cfaErr = cfa_inq_dim_id(id, name.c_str(), &dimId);
     if (cfaErr)
-        throw CFAException(cfaErr);
-    return CFADim(id, dimId);
+        throw Exception(cfaErr);
+    return CFA::Dim(id, dimId);
 }
 
-CFADim CFAGroup::addDim(std::string name, cfa_type type)
+CFA::Dim CFA::Group::addDim(std::string name, cfa_type type)
 {
-    return CFADim(id, name, type);
+    return CFA::Dim(id, name, type);
 }
 
-CFADim CFAGroup::addDim(std::string name, cfa_type type, int dimLen)
+CFA::Dim CFA::Group::addDim(std::string name, cfa_type type, int dimLen)
 {
-    return CFADim(id, name, type, dimLen);
+    return CFA::Dim(id, name, type, dimLen);
 }
 
-AggregationContainer* CFAGroup::getAggCont()
+AggregationContainer* CFA::Group::getAggCont()
 {
     AggregationContainer *aggCont;
     int cfaErr = cfa_get_cont(parentId, id, &aggCont);
     if (cfaErr)
-        throw CFAException(cfaErr);
+        throw Exception(cfaErr);
     return aggCont;
 }

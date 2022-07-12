@@ -3,51 +3,51 @@
 
 #include <algorithm>
 
-CFAVar::CFAVar(int parentId, int varId)
+CFA::Var::Var(int parentId, int varId)
 {
     this->id = varId;
     this->parentId = parentId;
 }
 
-CFAVar::CFAVar(int parentId, std::string name, cfa_type type) : CFAVar(parentId)
+CFA::Var::Var(int parentId, std::string name, cfa_type type) : Var(parentId)
 {
     int cfaErr = cfa_def_var(parentId, name.c_str(), type, &id);
     if (cfaErr)
-        throw CFAException(cfaErr);
+        throw Exception(cfaErr);
 }
         
-int CFAVar::getId() 
+int CFA::Var::getId() 
 { 
     return id; 
 }
 
-int CFAVar::getDimCount() 
+int CFA::Var::getDimCount() 
 {
     return getAggVar()->cfa_ndim; 
 }
 
-std::string CFAVar::getName() 
+std::string CFA::Var::getName() 
 {
     return getAggVar()->name; 
 }
 
-cfa_type CFAVar::getType() 
+cfa_type CFA::Var::getType() 
 { 
     return getAggVar()->cfa_dtype.type; 
 }
 
-CFADim CFAVar::getDim(int i) 
+CFA::Dim CFA::Var::getDim(int i) 
 {
-    return CFADim(parentId, getAggVar()->cfa_dim_idp[i]);
+    return Dim(parentId, getAggVar()->cfa_dim_idp[i]);
 }
 
-int CFAVar::updateDims(int dimId)
+int CFA::Var::updateDims(int dimId)
 {
     std::vector<int> dimIds = {dimId};
     return updateDims(dimIds);
 }
 
-int CFAVar::updateDims(std::vector<int> dimIds)
+int CFA::Var::updateDims(std::vector<int> dimIds)
 {
     int cfaErr = cfa_var_def_dims(parentId, id, getDimCount(), dimIds.data());
     if (cfaErr)
@@ -55,13 +55,13 @@ int CFAVar::updateDims(std::vector<int> dimIds)
     return 0;
 }
 
-int CFAVar::updateDims(std::string dimName)
+int CFA::Var::updateDims(std::string dimName)
 {
     std::vector<std::string> dimNames = {dimName};
     return updateDims(dimNames);
 }
 
-int CFAVar::updateDims(std::vector<std::string> dimNames)
+int CFA::Var::updateDims(std::vector<std::string> dimNames)
 {
     std::vector<int> dimIds;
     for(std::string dimName : dimNames)
@@ -75,9 +75,9 @@ int CFAVar::updateDims(std::vector<std::string> dimNames)
     return updateDims(dimIds);
 }
 
-std::vector<CFADim> CFAVar::getDims() 
+std::vector<CFA::Dim> CFA::Var::getDims() 
 {
-    std::vector<CFADim> dims;
+    std::vector<Dim> dims;
     int dimCount = getAggVar()->cfa_ndim;
     int *dimIds = getAggVar()->cfa_dim_idp;
     for(int i = 0; i < dimCount; i++)
@@ -85,19 +85,19 @@ std::vector<CFADim> CFAVar::getDims()
     return dims;
 }
 
-std::vector<std::string> CFAVar::getDimNames()
+std::vector<std::string> CFA::Var::getDimNames()
 {   
     std::vector<std::string> dimNames;
-    std::vector<CFADim> dims = getDims();
-    std::transform(dims.begin(), dims.end(), dimNames.begin(), [](CFADim dim) { return dim.getName(); });
+    std::vector<Dim> dims = getDims();
+    std::transform(dims.begin(), dims.end(), dimNames.begin(), [](Dim dim) { return dim.getName(); });
     return dimNames;
 }
 
-AggregationVariable* CFAVar::getAggVar()
+AggregationVariable* CFA::Var::getAggVar()
 {
     AggregationVariable *aggVar;
     int cfaErr = cfa_get_var(parentId, id, &aggVar);
     if (cfaErr)
-        throw CFAException(cfaErr);
+        throw Exception(cfaErr);
     return aggVar;
 }

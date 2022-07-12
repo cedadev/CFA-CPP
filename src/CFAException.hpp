@@ -1,11 +1,14 @@
 #pragma once
 #include <stdexcept>
 
-class CFAException : std::exception
+namespace CFA
 {
-    private:
-        std::string message;
-    public:
-        CFAException(int errorCode);
-        const char *what();
-};
+    class Exception : std::exception
+    {
+        private:
+            std::string message;
+        public:
+            Exception(int errorCode);
+            const char *what();
+    };
+}

@@ -12,36 +12,39 @@ extern "C" {
     #include "cfa.h"
 }
 
-class CFAGroup
-{    
-    protected:
-        int id;
-        int parentId;
+namespace CFA
+{
+    class Group
+    {    
+        protected:
+            int id;
+            int parentId;
 
-        AggregationContainer* getAggCont();
-    public:
-        CFAGroup();
-        CFAGroup(int parentId, std::string name);
-        CFAGroup(int parentId, int grpId = -1);
-        
-        int getId();
-        std::string getName();
+            AggregationContainer* getAggCont();
+        public:
+            Group();
+            Group(int parentId, std::string name);
+            Group(int parentId, int grpId = -1);
+            
+            int getId();
+            std::string getName();
 
-        int getVarCount();
-        int getDimCount();
-        int getGrpCount();
+            int getVarCount();
+            int getDimCount();
+            int getGrpCount();
 
-        CFAGroup getGrp(std::string name);
-        CFAGroup addGrp(std::string name);
+            Group getGrp(std::string name);
+            Group addGrp(std::string name);
 
-        CFAVar getVar(std::string name);
-        CFAVar addVar(std::string name, cfa_type type);
-        CFAVar addVar(std::string name, cfa_type type, int dimId);
-        CFAVar addVar(std::string name, cfa_type type, std::string dimName);
-        CFAVar addVar(std::string name, cfa_type type, std::vector<int> dimIds);
-        CFAVar addVar(std::string name, cfa_type type, std::vector<std::string> dimNames);
+            Var getVar(std::string name);
+            Var addVar(std::string name, cfa_type type);
+            Var addVar(std::string name, cfa_type type, int dimId);
+            Var addVar(std::string name, cfa_type type, std::string dimName);
+            Var addVar(std::string name, cfa_type type, std::vector<int> dimIds);
+            Var addVar(std::string name, cfa_type type, std::vector<std::string> dimNames);
 
-        CFADim getDim(std::string name);
-        CFADim addDim(std::string name, cfa_type type);
-        CFADim addDim(std::string name, cfa_type type, int dimLen);
-};
+            Dim getDim(std::string name);
+            Dim addDim(std::string name, cfa_type type);
+            Dim addDim(std::string name, cfa_type type, int dimLen);
+    };
+}

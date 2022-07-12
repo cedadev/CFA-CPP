@@ -6,17 +6,20 @@
 #include "CFAFileMode.hpp"
 #include "CFAFileFormat.hpp"
 
-class CFAFile : CFAGroup
+namespace CFA
 {
-    private:
-        std::string path;
-        CFAFileMode mode;
-        CFAFileFormat format;
-    public:
-        CFAFile(std::string path, CFACpp::CFAFileFormat format = CFACpp::CFAFileFormat::CFANetCDF, CFAFileMode mode = CFAFileMode::Read);
+    class File : Group
+    {
+        private:
+            std::string path;
+            FileMode mode;
+            FileFormat format;
+        public:
+            File(std::string path, FileFormat format = FileFormat::CFANetCDF, FileMode mode = FileMode::Read);
 
-        void open(std::string path, CFAFileFormat format);
-        void create(std::string path, CFAFileFormat format);
-        void enddef();
-        void close();
-};
+            void open(std::string path, CFAFileFormat format);
+            void create(std::string path, CFAFileFormat format);
+            void enddef();
+            void close();
+    };
+}
