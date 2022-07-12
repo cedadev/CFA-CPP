@@ -20,8 +20,9 @@ class CFAGroup
 
         AggregationContainer* getAggCont();
     public:
-        CFAGroup(std::string name, int parentId = -1);
-        CFAGroup(int parentId = -1, int grpId = -1);
+        CFAGroup();
+        CFAGroup(int parentId, std::string name);
+        CFAGroup(int parentId, int grpId = -1);
         
         int getId();
         std::string getName();

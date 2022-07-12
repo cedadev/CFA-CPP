@@ -7,7 +7,7 @@ CFAGroup::CFAGroup(int parentId, int grpId)
     this->parentId = parentId;
 }
 
-CFAGroup::CFAGroup(std::string name, int parentId) : CFAGroup(parentId)
+CFAGroup::CFAGroup(int parentId, std::string name) : CFAGroup(parentId)
 { 
     int cfaErr = cfa_def_cont(parentId, name.c_str(), &id);
     if (cfaErr)
@@ -34,12 +34,12 @@ int CFAGroup::getDimCount()
     return getAggCont()->n_dims; 
 }
 
-int CFAGroup::getGroupCount() 
+int CFAGroup::getGrpCount() 
 { 
     return getAggCont()->n_conts; 
 }
 
-CFAGroup CFAGroup::getGroup(std::string name) 
+CFAGroup CFAGroup::getGrp(std::string name) 
 {
     int grpId;
     int cfaErr = cfa_inq_cont_id(id, name.c_str(), &grpId);
@@ -48,9 +48,9 @@ CFAGroup CFAGroup::getGroup(std::string name)
     return CFAGroup(id, grpId);
 }
 
-CFAGroup CFAGroup::addGroup(std::string name)
+CFAGroup CFAGroup::addGrp(std::string name)
 {
-    return CFAGroup(name, parentId);
+    return CFAGroup(parentId, name);
 }
 
 CFAVar CFAGroup::getVar(std::string name) 

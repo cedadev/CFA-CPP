@@ -3,6 +3,7 @@
 
 CFAFile::CFAFile(std::string path, CFACpp::CFAFileFormat format, CFAFileMode mode)
 {
+    // open if read and create if write
     this->mode = mode;
     int cfaErr = cfa_create(path.c_str(), (CFAFileFormat)format, &id);
     if(cfaErr)
@@ -23,6 +24,7 @@ void CFAFile::create(std::string path, CFAFileFormat format)
 }
 void CFAFile::enddef()
 {
+    // serialise if write nothing if anything else
     int cfaErr = cfa_serialise(id);
     if(cfaErr)
         throw CFAException(cfaErr);
