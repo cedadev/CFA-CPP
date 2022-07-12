@@ -31,17 +31,17 @@
         {
             "label": "build_test_cfa_file",
             "command": "make",
-            "args": ["test_cfa_dim"],
+            "args": ["test_cfa_file"],
         },
         {
             "label": "build_test_cfa_group",
             "command": "make",
-            "args": ["test_cfa_dim"],
+            "args": ["test_cfa_group"],
         },
         {
             "label": "build_test_cfa_var",
             "command": "make",
-            "args": ["test_cfa_dim"],
+            "args": ["test_cfa_var"],
         }
     ],
     "version": "2.0.0"

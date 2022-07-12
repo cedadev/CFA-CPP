@@ -2,5 +2,5 @@
 
 int main(void)
 {
-    CFAFile file("./examples/test/test_cfa.nc");
+    CFA::File file("./examples/test/test_cfa.nc");
 }
