@@ -3,7 +3,6 @@
 
 CFA::File::File(std::string path, FileFormat format, FileMode mode)
 {
-    // open if read and create if write
     this->mode = mode;
     int cfaErr = 0;
     if(this->mode == FileMode::Read)
@@ -18,7 +17,6 @@ CFA::File::File(std::string path, FileFormat format, FileMode mode)
 
 void CFA::File::enddef()
 {
-    // serialise if write nothing if anything else
     int cfaErr = 0;
     if(mode == FileMode::Write)
         cfaErr = cfa_serialise(id);
