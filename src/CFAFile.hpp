@@ -16,9 +16,7 @@ namespace CFA
             FileFormat format;
         public:
             File(std::string path, FileFormat format = FileFormat::CFANetCDF, FileMode mode = FileMode::Read);
-
-            void open(std::string path, CFAFileFormat format);
-            void create(std::string path, CFAFileFormat format);
+            
             void enddef();
             void close();
     };
