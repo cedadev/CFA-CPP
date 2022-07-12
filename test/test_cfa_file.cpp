@@ -7,8 +7,6 @@ void test_cfa_file_close() {}
 int main(void)
 {
     test_cfa_file_creation();
-    test_cfa_file_open();
-    test_cfa_file_create();
     test_cfa_file_enddef();
     test_cfa_file_close();
 }
