@@ -5,9 +5,7 @@
 #include <assert.h>
 #include <iostream>
 
-const std::string filePath = "./testFile.nc";
-const std::string readFilePath = "./readFile.nc";
-const std::string writeFilePath = "./writeFile.nc";
+const std::string filePath = "./examples/test/cfa_file_test.nc";
 
 void test_cfa_file_creation() 
 {
