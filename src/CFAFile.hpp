@@ -8,7 +8,7 @@
 
 namespace CFA
 {
-    class File : Group
+    class File : public Group
     {
         private:
             std::string path;
