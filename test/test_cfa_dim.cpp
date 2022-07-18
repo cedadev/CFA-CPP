@@ -5,14 +5,16 @@
 #include <string>
 #include <assert.h>
 
+const std::string filePath = "./test.nc";
+const std::string groupName = "Test Group";
 const std::string dimWithDefaultLengthName = "Default Length Dim";
 const std::string dimWithLengthName = "Dim With Length";
 const std::string dimWithLengthAndTypeName = "Dim With Length and Type";
 
 void test_cfa_dim_creation() 
 {
-    CFA::File file("./test.nc", CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), "Test Group");
+    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+    CFA::Group group(file.getId(), groupName);
 
     CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
     assert(dimWithDefaultLength.getId() != -1);
@@ -26,8 +28,8 @@ void test_cfa_dim_creation()
 
 void test_cfa_dim_get_length() 
 {
-    CFA::File file("./test.nc", CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), "Test Group");
+    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+    CFA::Group group(file.getId(), groupName);
 
     CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
     assert(dimWithDefaultLength.getLen() == 1);
@@ -41,8 +43,8 @@ void test_cfa_dim_get_length()
 
 void test_cfa_dim_get_name() 
 {
-    CFA::File file("./test.nc", CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), "Test Group");
+    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+    CFA::Group group(file.getId(), groupName);
 
     CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
     assert(dimWithDefaultLength.getName() == dimWithDefaultLengthName);
@@ -57,7 +59,7 @@ void test_cfa_dim_get_name()
 void test_cfa_dim_get_type() 
 {
     CFA::File file("./test.nc", CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), "Test Group");
+    CFA::Group group(file.getId(), groupName);
 
     CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
     assert(dimWithDefaultLength.getType() == 0);

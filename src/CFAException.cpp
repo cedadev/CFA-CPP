@@ -6,7 +6,7 @@ CFA::Exception::Exception(int errorCode)
     message.append(std::to_string(errorCode));
 }
 
-const char *CFA::Exception::what() 
+const char *CFA::Exception::what() const noexcept
 {
     return message.c_str();
 }

@@ -9,6 +9,6 @@ namespace CFA
             std::string message;
         public:
             Exception(int errorCode);
-            const char *what();
+            const char *what() const noexcept;
     };
 }
