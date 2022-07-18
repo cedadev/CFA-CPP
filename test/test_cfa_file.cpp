@@ -14,15 +14,17 @@ void test_cfa_file_creation()
         CFA::File writeFile(filePath, CFA::CFANetCDF, CFA::Write);
         writeFile.enddef();
         writeFile.close();
+        assert(writeFile.getId() != -1);
     }
     catch(const CFA::Exception& ex)
     {
         std::cerr << ex.what() << '\n';
     }
-
+    
     try
     {
         CFA::File defaultFile(filePath, CFA::CFANetCDF);
+        assert(defaultFile.getId() != -1);
     }
     catch(const CFA::Exception& ex)
     {
@@ -32,6 +34,7 @@ void test_cfa_file_creation()
     try
     {
         CFA::File readFile(filePath, CFA::CFANetCDF, CFA::Read);
+        assert(readFile.getId() != -1);
     }
     catch(const CFA::Exception& ex)
     {
@@ -39,8 +42,55 @@ void test_cfa_file_creation()
     }
 }
 
-void test_cfa_file_enddef() {}
-void test_cfa_file_close() {}
+void test_cfa_file_enddef()
+{
+    try
+    {
+        CFA::File writeFile(filePath, CFA::CFANetCDF, CFA::Write);
+        writeFile.enddef();
+        assert(writeFile.getId() != -1);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
+    
+    try
+    {
+        CFA::File defaultFile(filePath, CFA::CFANetCDF);
+        defaultFile.enddef();
+        assert(defaultFile.getId() != -1);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
+}
+
+void test_cfa_file_close()
+{
+    try
+    {
+        CFA::File writeFile(filePath, CFA::CFANetCDF, CFA::Write);
+        writeFile.close();
+        assert(writeFile.getId() != -1);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
+    
+    try
+    {
+        CFA::File defaultFile(filePath, CFA::CFANetCDF);
+        defaultFile.close();
+        assert(defaultFile.getId() != -1);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
+}
 
 int main(void)
 {
