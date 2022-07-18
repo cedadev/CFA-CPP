@@ -8,7 +8,7 @@ namespace CFA
         private:
             std::string message;
         public:
-            Exception(int errorCode);
+            Exception(int errCode);
             const char *what() const noexcept;
     };
 }
