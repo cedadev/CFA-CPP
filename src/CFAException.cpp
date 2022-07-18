@@ -1,4 +1,4 @@
-#include "cfa.h"
+#include "cfa_errs.h"
 #include "CFAException.hpp"
 
 CFA::Exception::Exception(int errCode) 
@@ -29,9 +29,9 @@ CFA::Exception::Exception(int errCode)
         case CFA_VAR_NO_AGG_INSTR:
             message = "Aggregation instructions missing";
             break;
-        /*case CFA_VAR_FRAGS_DEF:
+        case CFA_VAR_FRAGS_DEF:
             message = "Fragments already defined";
-            break;*/
+            break;
         case CFA_VAR_FRAGS_UNDEF:
             message = "Fragments not defined yet";
             break;
@@ -59,9 +59,9 @@ CFA::Exception::Exception(int errCode)
         case CFA_AGG_DATA_ERR:
             message = "Something went wrong parsing the aggregated_data attribute";
             break;
-        /*case CFA_AGG_DIM_ERR:
+        case CFA_AGG_DIM_ERR:
             message = "Something went wrong parsing the aggregated_dimensions attribute";
-            break;*/
+            break;
         case CFA_AGG_NOT_DEFINED:
             message = "Aggregation Instructions have not been defined";
             break;
