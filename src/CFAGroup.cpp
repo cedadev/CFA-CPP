@@ -1,11 +1,6 @@
 #include "CFAGroup.hpp"
 #include "CFAException.hpp"
 
-CFA::Group::Group()
-{
-    
-}
-
 CFA::Group::Group(int parentId, int grpId)
 {
     this->id = grpId;

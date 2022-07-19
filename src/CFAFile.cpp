@@ -1,7 +1,7 @@
 #include "CFAFile.hpp"
 #include "CFAException.hpp"
 
-CFA::File::File(std::string path, FileFormat format, FileMode mode)
+CFA::File::File(std::string path, FileFormat format, FileMode mode) : CFA::Group::Group(CFA::Group::rootGroupParentId)
 {
     this->mode = mode;
     int cfaErr = 0;

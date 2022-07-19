@@ -20,11 +20,12 @@ namespace CFA
             int id;
             int parentId;
 
+            static const int rootGroupParentId = -1;
+
             AggregationContainer* getAggCont();
         public:
-            Group();
-            Group(int parentId, std::string name);
             Group(int parentId, int grpId = -1);
+            Group(int parentId, std::string name);
             
             int getId();
             std::string getName();
