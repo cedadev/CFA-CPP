@@ -50,7 +50,7 @@ CFA::Group CFA::Group::getGrp(std::string name)
 
 CFA::Group CFA::Group::addGrp(std::string name)
 {
-    return Group(parentId, name);
+    return Group(id, name);
 }
 
 CFA::Var CFA::Group::getVar(std::string name) 
