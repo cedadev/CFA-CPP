@@ -118,7 +118,36 @@ void test_cfa_grp_get_grp()
     }
 }
 
-void test_cfa_grp_add_grp() {}
+void test_cfa_grp_add_grp() 
+{
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+        CFA::Group grp = file.addGrp(grpName);
+
+        assert(file.getGrpCount() == 1);
+        assert(grp.getGrpCount() == 0);
+
+        file.addGrp(fileGrp1Name);
+        file.addGrp(fileGrp2Name);
+
+        assert(file.getGrpCount() == 3);
+        assert(grp.getGrpCount() == 0);
+
+        grp.addGrp(grpGrp1Name);
+        grp.addGrp(grpGrp2Name);
+        grp.addGrp(grpGrp3Name);
+        grp.addGrp(grpGrp4Name);
+
+        assert(file.getGrpCount() == 3);
+        assert(grp.getGrpCount() == 4);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
+}
+
 void test_cfa_grp_get_var() {}
 void test_cfa_grp_add_var() {}
 void test_cfa_grp_get_dim() {}

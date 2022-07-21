@@ -41,7 +41,7 @@ int CFA::Group::getGrpCount()
 
 CFA::Group CFA::Group::getGrp(std::string name) 
 {
-    int grpId;
+    int grpId = -1;
     int cfaErr = cfa_inq_cont_id(id, name.c_str(), &grpId);
     if (cfaErr)
         throw Exception(cfaErr);
