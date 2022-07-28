@@ -1,74 +1,99 @@
 #include "CFADim.hpp"
 #include "CFAFile.hpp"
 #include "CFAGroup.hpp"
+#include "CFAException.hpp"
 
 #include <string>
 #include <assert.h>
+#include <iostream>
 
 const std::string filePath = "./test.nc";
-const std::string groupName = "Test Group";
 const std::string dimWithDefaultLengthName = "Default Length Dim";
 const std::string dimWithLengthName = "Dim With Length";
 const std::string dimWithLengthAndTypeName = "Dim With Length and Type";
 
 void test_cfa_dim_creation() 
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), groupName);
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
 
-    CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
-    assert(dimWithDefaultLength.getId() != -1);
+        CFA::Dim dimWithDefaultLength(file.getId(), dimWithDefaultLengthName, 0);
+        assert(dimWithDefaultLength.getId() != -1);
 
-    CFA::Dim dimWithLength(group.getId(), dimWithLengthName, 0, 5);
-    assert(dimWithLength.getId() != -1);
+        CFA::Dim dimWithLength(file.getId(), dimWithLengthName, 0, 5);
+        assert(dimWithLength.getId() != -1);
 
-    CFA::Dim dimWithLengthAndType(group.getId(), dimWithLengthAndTypeName, 1, 3);
-    assert(dimWithLengthAndType.getId() != -1);
+        CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
+        assert(dimWithLengthAndType.getId() != -1);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
 }
 
 void test_cfa_dim_get_length() 
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), groupName);
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
 
-    CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
-    assert(dimWithDefaultLength.getLen() == 1);
+        CFA::Dim dimWithDefaultLength(file.getId(), dimWithDefaultLengthName, 0);
+        assert(dimWithDefaultLength.getLen() == 1);
 
-    CFA::Dim dimWithLength(group.getId(), dimWithLengthName, 0, 5);
-    assert(dimWithLength.getLen() == 5);
+        CFA::Dim dimWithLength(file.getId(), dimWithLengthName, 0, 5);
+        assert(dimWithLength.getLen() == 5);
 
-    CFA::Dim dimWithLengthAndType(group.getId(), dimWithLengthAndTypeName, 1, 3);
-    assert(dimWithLengthAndType.getLen() == 3);
+        CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
+        assert(dimWithLengthAndType.getLen() == 3);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
 }
 
 void test_cfa_dim_get_name() 
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), groupName);
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
 
-    CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
-    assert(dimWithDefaultLength.getName() == dimWithDefaultLengthName);
+        CFA::Dim dimWithDefaultLength(file.getId(), dimWithDefaultLengthName, 0);
+        assert(dimWithDefaultLength.getName() == dimWithDefaultLengthName);
 
-    CFA::Dim dimWithLength(group.getId(), dimWithLengthName, 0, 5);
-    assert(dimWithLength.getName() == dimWithLengthName);
+        CFA::Dim dimWithLength(file.getId(), dimWithLengthName, 0, 5);
+        assert(dimWithLength.getName() == dimWithLengthName);
 
-    CFA::Dim dimWithLengthAndType(group.getId(), dimWithLengthAndTypeName, 1, 3);
-    assert(dimWithLengthAndType.getName() == dimWithLengthAndTypeName);
+        CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
+        assert(dimWithLengthAndType.getName() == dimWithLengthAndTypeName);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
 }
 
 void test_cfa_dim_get_type() 
 {
-    CFA::File file("./test.nc", CFA::CFANetCDF, CFA::Write);
-    CFA::Group group(file.getId(), groupName);
+    try
+    {
+        CFA::File file("./test.nc", CFA::CFANetCDF, CFA::Write);
 
-    CFA::Dim dimWithDefaultLength(group.getId(), dimWithDefaultLengthName, 0);
-    assert(dimWithDefaultLength.getType() == 0);
+        CFA::Dim dimWithDefaultLength(file.getId(), dimWithDefaultLengthName, 0);
+        assert(dimWithDefaultLength.getType() == 0);
 
-    CFA::Dim dimWithLength(group.getId(), dimWithLengthName, 0, 5);
-    assert(dimWithLength.getType() == 0);
+        CFA::Dim dimWithLength(file.getId(), dimWithLengthName, 0, 5);
+        assert(dimWithLength.getType() == 0);
 
-    CFA::Dim dimWithLengthAndType(group.getId(), dimWithLengthAndTypeName, 1, 3);
-    assert(dimWithLengthAndType.getType() == 1);
+        CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
+        assert(dimWithLengthAndType.getType() == 1);
+    }
+    catch(const CFA::Exception& ex)
+    {
+        std::cerr << ex.what() << '\n';
+    }
 }
 
 int main(void)
