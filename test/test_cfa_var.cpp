@@ -2,9 +2,11 @@
 #include "CFAVar.hpp"
 #include "CFAFile.hpp"
 #include "CFAGroup.hpp"
+#include "CFAException.hpp"
 
 #include <string>
 #include <assert.h>
+#include <iostream>
 
 const std::string filePath = "./test.nc";
 const std::string varName = "CFA Var";
@@ -28,9 +30,9 @@ void test_cfa_var_get_dim_count()
     CFA::Dim dim2 = file.addDim(dim2Name, 0);
     CFA::Dim dim3 = file.addDim(dim3Name, 0);
 
-    std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
+    std::vector<int> dimIds {dim1.getId(), dim2.getId(), dim3.getId()};
     CFA::Var var = file.addVar(varName, 0, dimIds);
-
+    
     assert(var.getDimCount() == 3);
 }
 
@@ -47,7 +49,7 @@ void test_cfa_var_get_type()
     CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
     CFA::Var var = file.addVar(varName, 0);
 
-    assert(var.getType() == 3);
+    assert(var.getType() == 0);
 }
 
 void test_cfa_var_get_dim()
@@ -101,20 +103,6 @@ void test_cfa_var_get_dim_names()
     assert(dimNames[2] == dim3.getName());
 }
 
-void test_cfa_var_update_dim()
-{
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-
-    CFA::Dim dim1 = file.addDim(dim1Name, 0);
-    CFA::Dim dim2 = file.addDim(dim2Name, 0);
-    CFA::Dim dim3 = file.addDim(dim3Name, 0);
-
-    std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
-    CFA::Var var = file.addVar(varName, 0, dimIds);
-
-    assert(var.getDimCount() == 3);
-}
-
 int main(void)
 {
     test_cfa_var_creation();
@@ -124,5 +112,4 @@ int main(void)
     test_cfa_var_get_dim();
     test_cfa_var_get_dims();
     test_cfa_var_get_dim_names();
-    test_cfa_var_update_dim();
 }
