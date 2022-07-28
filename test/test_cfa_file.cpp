@@ -47,7 +47,7 @@ void test_cfa_file_enddef()
     try
     {
         CFA::File writeFile(filePath, CFA::CFANetCDF, CFA::Write);
-        writeFile.enddef();
+        writeFile.enddef(); // This throws an Unknown Exception error
         assert(writeFile.getId() != -1);
     }
     catch(const CFA::Exception& ex)
