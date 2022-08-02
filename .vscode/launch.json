@@ -19,7 +19,8 @@
             "linux": {
                 "MIMode": "gdb",
                 "environment": [{"name" : "LD_LIBRARY_PATH",
-                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}]
+                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}],
+                "setupCommands": [{"text": "-enable-pretty-printing"}]
             },
             "preLaunchTask": "build_example1",
         },
@@ -39,7 +40,8 @@
             "linux": {
                 "MIMode": "gdb",
                 "environment": [{"name" : "LD_LIBRARY_PATH",
-                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}]
+                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}],
+                "setupCommands": [{"text": "-enable-pretty-printing"}]
             },
             "preLaunchTask": "build_test_cfa_dim",
         },
@@ -59,7 +61,8 @@
             "linux": {
                 "MIMode": "gdb",
                 "environment": [{"name" : "LD_LIBRARY_PATH",
-                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}]
+                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}],
+                "setupCommands": [{"text": "-enable-pretty-printing"}]
             },
             "preLaunchTask": "build_test_cfa_file",
         },
@@ -79,7 +82,8 @@
             "linux": {
                 "MIMode": "gdb",
                 "environment": [{"name" : "LD_LIBRARY_PATH",
-                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}]
+                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}],
+                "setupCommands": [{"text": "-enable-pretty-printing"}]
             },
             "preLaunchTask": "build_test_cfa_group",
         },
@@ -99,7 +103,8 @@
             "linux": {
                 "MIMode": "gdb",
                 "environment": [{"name" : "LD_LIBRARY_PATH",
-                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}]
+                "value" : "$LD_LIBRARY_PATH:../CFA-C/lib;lib/"}],
+                "setupCommands": [{"text": "-enable-pretty-printing"}]
             },
             "preLaunchTask": "build_test_cfa_var",
         },

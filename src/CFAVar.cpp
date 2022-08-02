@@ -49,7 +49,7 @@ int CFA::Var::updateDims(int dimId)
 
 int CFA::Var::updateDims(std::vector<int> dimIds)
 {
-    int cfaErr = cfa_var_def_dims(parentId, id, getDimCount(), dimIds.data());
+    int cfaErr = cfa_var_def_dims(parentId, id, dimIds.size(), dimIds.data());
     if (cfaErr)
         return (cfaErr);
     return 0;
@@ -87,9 +87,11 @@ std::vector<CFA::Dim> CFA::Var::getDims()
 
 std::vector<std::string> CFA::Var::getDimNames()
 {   
-    std::vector<std::string> dimNames;
     std::vector<Dim> dims = getDims();
-    std::transform(dims.begin(), dims.end(), dimNames.begin(), [](Dim dim) { return dim.getName(); });
+    std::vector<std::string> dimNames;
+    dimNames.reserve(dims.size());
+    
+    std::transform(dims.begin(), dims.end(), std::back_inserter(dimNames), [](Dim& dim) -> std::string { return dim.getName(); });
     return dimNames;
 }
 
