@@ -29,7 +29,7 @@ void test_cfa_dim_creation()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_dim_creation: " << e.what() << '\n';
     }
 }
 
@@ -50,7 +50,7 @@ void test_cfa_dim_get_length()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_dim_get_length: " << e.what() << '\n';
     }
 }
 
@@ -71,7 +71,7 @@ void test_cfa_dim_get_name()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_dim_get_name: " << e.what() << '\n';
     }
 }
 
@@ -92,7 +92,7 @@ void test_cfa_dim_get_type()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_dim_get_type: " << e.what() << '\n';
     }
 }
 
@@ -102,4 +102,5 @@ int main(void)
     test_cfa_dim_get_length();
     test_cfa_dim_get_name();
     test_cfa_dim_get_type();
+    std::cout << "CFA Dim Tests Passed Successfully\n";
 }

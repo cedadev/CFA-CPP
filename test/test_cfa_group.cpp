@@ -40,7 +40,7 @@ void test_cfa_grp_creation()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_grp_creation: " << e.what() << '\n';
     }
 }
 
@@ -55,7 +55,7 @@ void test_cfa_grp_get_name()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_grp_get_name: " << e.what() << '\n';
     }
 }
 
@@ -85,7 +85,7 @@ void test_cfa_grp_get_grp_count()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_get_grp_count: " << e.what() << '\n';
     }
 }
 
@@ -116,7 +116,7 @@ void test_cfa_grp_get_grp()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_grp_get_grp: " << e.what() << '\n';
     }
 }
 
@@ -138,7 +138,7 @@ void test_cfa_grp_get_var_count()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_grp_get_var_count: " << e.what() << '\n';
     }
     
 }
@@ -160,7 +160,7 @@ void test_cfa_grp_get_var()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_grp_get_var: " << e.what() << '\n';
     }  
 }
 
@@ -181,7 +181,7 @@ void test_cfa_grp_get_dim_count()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_grp_get_dim_count: " << e.what() << '\n';
     }
 }
 
@@ -202,7 +202,7 @@ void test_cfa_grp_get_dim()
     }
     catch(const CFA::Exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "test_cfa_grp_get_dim: " << e.what() << '\n';
     }
 }
 
@@ -216,4 +216,5 @@ int main()
     test_cfa_grp_get_grp();
     test_cfa_grp_get_var();
     test_cfa_grp_get_dim();
+    std::cout << "CFA Group Tests Passed Successfully\n";
 }
