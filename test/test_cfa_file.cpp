@@ -16,9 +16,9 @@ void test_cfa_file_creation()
         writeFile.close();
         assert(writeFile.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
     
     try
@@ -26,9 +26,9 @@ void test_cfa_file_creation()
         CFA::File defaultFile(filePath, CFA::CFANetCDF);
         assert(defaultFile.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
     
     try
@@ -36,9 +36,9 @@ void test_cfa_file_creation()
         CFA::File readFile(filePath, CFA::CFANetCDF, CFA::Read);
         assert(readFile.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -50,9 +50,9 @@ void test_cfa_file_enddef()
         writeFile.enddef(); // This throws an Unknown Exception error
         assert(writeFile.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
     
     try
@@ -61,9 +61,9 @@ void test_cfa_file_enddef()
         defaultFile.enddef();
         assert(defaultFile.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -75,9 +75,9 @@ void test_cfa_file_close()
         writeFile.close();
         assert(writeFile.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
     
     try
@@ -86,9 +86,9 @@ void test_cfa_file_close()
         defaultFile.close();
         assert(defaultFile.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 

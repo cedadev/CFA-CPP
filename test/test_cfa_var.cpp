@@ -16,91 +16,140 @@ const std::string dim3Name = "CFA Dim 3";
 
 void test_cfa_var_creation() 
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-    CFA::Var var = file.addVar(varName, 0);
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+        CFA::Var var = file.addVar(varName, 0);
 
-    assert(var.getId() != -1);
+        assert(var.getId() != -1);
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 void test_cfa_var_get_dim_count() 
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
 
-    CFA::Dim dim1 = file.addDim(dim1Name, 0);
-    CFA::Dim dim2 = file.addDim(dim2Name, 0);
-    CFA::Dim dim3 = file.addDim(dim3Name, 0);
+        CFA::Dim dim1 = file.addDim(dim1Name, 0);
+        CFA::Dim dim2 = file.addDim(dim2Name, 0);
+        CFA::Dim dim3 = file.addDim(dim3Name, 0);
 
-    std::vector<int> dimIds {dim1.getId(), dim2.getId(), dim3.getId()};
-    CFA::Var var = file.addVar(varName, 0, dimIds);
-    
-    assert(var.getDimCount() == 3);
+        std::vector<int> dimIds {dim1.getId(), dim2.getId(), dim3.getId()};
+        CFA::Var var = file.addVar(varName, 0, dimIds);
+        
+        assert(var.getDimCount() == 3);
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 void test_cfa_var_get_name()
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-    CFA::Var var = file.addVar(varName, 0);
+    try
+    {        
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+        CFA::Var var = file.addVar(varName, 0);
 
-    assert(var.getName() == varName);
+        assert(var.getName() == varName);
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 void test_cfa_var_get_type()
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-    CFA::Var var = file.addVar(varName, 0);
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+        CFA::Var var = file.addVar(varName, 0);
 
-    assert(var.getType() == 0);
+        assert(var.getType() == 0);
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 void test_cfa_var_get_dim()
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+    try
+    {        
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
 
-    CFA::Dim dim1 = file.addDim(dim1Name, 0);
-    CFA::Dim dim2 = file.addDim(dim2Name, 0);
-    CFA::Dim dim3 = file.addDim(dim3Name, 0);
+        CFA::Dim dim1 = file.addDim(dim1Name, 0);
+        CFA::Dim dim2 = file.addDim(dim2Name, 0);
+        CFA::Dim dim3 = file.addDim(dim3Name, 0);
 
-    std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
-    CFA::Var var = file.addVar(varName, 0, dimIds);
+        std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
+        CFA::Var var = file.addVar(varName, 0, dimIds);
 
-    assert(var.getDim(0).getId() == dim1.getId());
-    assert(var.getDim(1).getId() == dim2.getId());
-    assert(var.getDim(2).getId() == dim3.getId());
+        assert(var.getDim(0).getId() == dim1.getId());
+        assert(var.getDim(1).getId() == dim2.getId());
+        assert(var.getDim(2).getId() == dim3.getId());
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 void test_cfa_var_get_dims()
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
-
-    CFA::Dim dim1 = file.addDim(dim1Name, 0);
-    CFA::Dim dim2 = file.addDim(dim2Name, 0);
-    CFA::Dim dim3 = file.addDim(dim3Name, 0);
-
-    std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
-    CFA::Var var = file.addVar(varName, 0, dimIds);
-
-    std::vector<CFA::Dim> dims = var.getDims();
-    for(int i = 0; i < dims.size(); i++)
+    try
     {
-        assert(dims[i].getId() == dimIds[i]);
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+
+        CFA::Dim dim1 = file.addDim(dim1Name, 0);
+        CFA::Dim dim2 = file.addDim(dim2Name, 0);
+        CFA::Dim dim3 = file.addDim(dim3Name, 0);
+
+        std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
+        CFA::Var var = file.addVar(varName, 0, dimIds);
+
+        std::vector<CFA::Dim> dims = var.getDims();
+        for(int i = 0; i < dims.size(); i++)
+        {
+            assert(dims[i].getId() == dimIds[i]);
+        }
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
     }
 }
 
 void test_cfa_var_get_dim_names()
 {
-    CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
+    try
+    {
+        CFA::File file(filePath, CFA::CFANetCDF, CFA::Write);
 
-    CFA::Dim dim1 = file.addDim(dim1Name, 0);
-    CFA::Dim dim2 = file.addDim(dim2Name, 0);
-    CFA::Dim dim3 = file.addDim(dim3Name, 0);
+        CFA::Dim dim1 = file.addDim(dim1Name, 0);
+        CFA::Dim dim2 = file.addDim(dim2Name, 0);
+        CFA::Dim dim3 = file.addDim(dim3Name, 0);
 
-    std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
-    CFA::Var var = file.addVar(varName, 0, dimIds);
+        std::vector<int> dimIds = {dim1.getId(), dim2.getId(), dim3.getId()};
+        CFA::Var var = file.addVar(varName, 0, dimIds);
 
-    std::vector<std::string> dimNames = var.getDimNames();
-    assert(dimNames[0] == dim1.getName());
-    assert(dimNames[1] == dim2.getName());
-    assert(dimNames[2] == dim3.getName());
+        std::vector<std::string> dimNames = var.getDimNames();
+        assert(dimNames[0] == dim1.getName());
+        assert(dimNames[1] == dim2.getName());
+        assert(dimNames[2] == dim3.getName());
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }    
 }
 
 int main(void)

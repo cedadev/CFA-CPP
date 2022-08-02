@@ -38,9 +38,9 @@ void test_cfa_grp_creation()
 
         assert(grp.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -53,9 +53,9 @@ void test_cfa_grp_get_name()
 
         assert(grp.getName() == grpName);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -83,9 +83,9 @@ void test_cfa_grp_get_grp_count()
         assert(file.getGrpCount() == 3);
         assert(grp.getGrpCount() == 4);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -114,9 +114,9 @@ void test_cfa_grp_get_grp()
         assert(grp.getGrp(grpGrp3Name).getId() == grpGrp3.getId());
         assert(grp.getGrp(grpGrp4Name).getId() == grpGrp4.getId());
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -136,9 +136,9 @@ void test_cfa_grp_get_var_count()
         file.addVar(var4Name, 0);
         assert(file.getVarCount() == 4);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
     
 }
@@ -158,9 +158,9 @@ void test_cfa_grp_get_var()
         assert(file.getVar(var3Name).getId() == var3.getId());
         assert(file.getVar(var4Name).getId() == var4.getId());
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }  
 }
 
@@ -179,9 +179,9 @@ void test_cfa_grp_get_dim_count()
         file.addDim(dim4Name, 0);
         assert(file.getDimCount() == 4);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -200,9 +200,9 @@ void test_cfa_grp_get_dim()
         assert(file.getDim(dim3Name).getId() == dim3.getId());
         assert(file.getDim(dim4Name).getId() == dim4.getId());
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 

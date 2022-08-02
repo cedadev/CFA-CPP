@@ -27,9 +27,9 @@ void test_cfa_dim_creation()
         CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
         assert(dimWithLengthAndType.getId() != -1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -48,9 +48,9 @@ void test_cfa_dim_get_length()
         CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
         assert(dimWithLengthAndType.getLen() == 3);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -69,9 +69,9 @@ void test_cfa_dim_get_name()
         CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
         assert(dimWithLengthAndType.getName() == dimWithLengthAndTypeName);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
@@ -90,9 +90,9 @@ void test_cfa_dim_get_type()
         CFA::Dim dimWithLengthAndType(file.getId(), dimWithLengthAndTypeName, 1, 3);
         assert(dimWithLengthAndType.getType() == 1);
     }
-    catch(const CFA::Exception& ex)
+    catch(const CFA::Exception& e)
     {
-        std::cerr << ex.what() << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
 
