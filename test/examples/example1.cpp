@@ -105,8 +105,10 @@ void save()
         if(cfaErr)
             throw CFA::Exception(cfaErr);
         
+        /* Close the CFA file (closes the netCDF file as well) */
         file.close();
 
+        /* Check for memory leaks */
         cfaErr = cfa_memcheck();
         if(cfaErr)
             throw CFA::Exception(cfaErr);
@@ -119,10 +121,46 @@ void save()
 
 void load()
 {
+    std::cout << "Example 1 Test Load\n";
+    try
+    {
+        int cfaErr = CFA_NOERR;
+        /* Load and parse the CFA parent container */
+        CFA::File file(path, CFA::FileFormat::CFANetCDF, CFA::FileMode::Read);
+        
+        /* Get the "temp" variable */
+        CFA::Var temperature = file.getVar("temp");
 
+        /* Get the first fragment */
+        size_t fragLocation[4] = {0, 0, 0, 0};
+        Fragment frag1 = temperature.getFragmentByFragLocation(fragLocation);
+
+        /* Get the fragment by data location */
+        size_t dataLocation[4] = {6, 0, 0, 0};
+        Fragment frag2 = temperature.getFragmentByDataLocation(dataLocation);
+
+        /* Output Info */
+        cfaErr = cfa_info(file.getId(), 0);
+        if(cfaErr)
+            throw CFA::Exception(cfaErr);
+
+        /* Close file - frees the memory */
+        file.close();
+
+        /* Check for memory leaks */
+        cfaErr = cfa_memcheck();
+        if(cfaErr)
+            throw CFA::Exception(cfaErr);
+    }
+    catch(const CFA::Exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
 }
 
 int main(void)
 {
     save();
+    load();
 }

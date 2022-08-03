@@ -44,6 +44,8 @@ namespace CFA
 
             /* Add Fragment */
             void defFragments(int frags[]);
+            Fragment getFragmentByFragLocation(size_t location[]);
+            Fragment getFragmentByDataLocation(size_t location[]);
             void addFragment(size_t fragLocation[], size_t dataLocation[], const char *file, const char *format, const char *address, const char *units);
 
             int getNcVarId(int ncId);

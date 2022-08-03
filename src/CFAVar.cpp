@@ -112,6 +112,26 @@ void CFA::Var::defFragments(int frags[])
         throw CFA::Exception(cfaErr);
 }
 
+Fragment CFA::Var::getFragmentByFragLocation(size_t location[])
+{
+    int cfaErr = CFA_NOERR;
+    const Fragment *frag = NULL;
+    cfaErr = cfa_var_get1_frag(parentId, id, location, NULL, &frag);
+    if(cfaErr)
+        throw CFA::Exception(cfaErr);
+    return *frag;
+}
+
+Fragment CFA::Var::getFragmentByDataLocation(size_t location[])
+{
+    int cfaErr = CFA_NOERR;
+    const Fragment *frag = NULL;
+    cfaErr = cfa_var_get1_frag(parentId, id, NULL, location, &frag);
+    if(cfaErr)
+        throw CFA::Exception(cfaErr);
+    return *frag;
+}
+
 void CFA::Var::addFragment(size_t fragLocation[], size_t dataLocation[], const char *file, const char *format, const char *address, const char *units)
 {
     int cfaErr = CFA_NOERR;
