@@ -24,5 +24,9 @@ namespace CFA
             int getLen();
             std::string getName();
             cfa_type getType();
+
+            int getNcVarId();
+            int getNcFileId();
+            void setNCAttText(std::string attName, std::string value);
     };
 }

@@ -38,5 +38,9 @@ namespace CFA
             
             std::vector<Dim> getDims();
             std::vector<std::string> getDimNames();
+
+            int getNcVarId();
+            int getNcFileId();
+            void setNCAttText(std::string attName, std::string value);
     };
 }

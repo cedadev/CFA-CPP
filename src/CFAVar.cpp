@@ -1,6 +1,7 @@
 #include "CFAVar.hpp"
 #include "CFAException.hpp"
 
+#include <netcdf.h>
 #include <algorithm>
 
 CFA::Var::Var(int parentId, int varId)
@@ -93,6 +94,37 @@ std::vector<std::string> CFA::Var::getDimNames()
     
     std::transform(dims.begin(), dims.end(), std::back_inserter(dimNames), [](Dim& dim) -> std::string { return dim.getName(); });
     return dimNames;
+}
+
+int CFA::Var::getNcVarId()
+{
+    int cfaErr = CFA_NOERR;
+
+    int ncVarId = -1;
+    cfaErr = nc_inq_varid(getNcFileId(), getAggVar()->name, &ncVarId);
+    if(cfaErr != CFA_NOERR)
+        throw CFA::Exception(cfaErr);
+}
+
+int CFA::Var::getNcFileId()
+{
+    int cfaErr = CFA_NOERR;
+
+    int ncId = -1;
+    cfaErr = cfa_get_ext_file_id(parentId, &ncId);
+    if(cfaErr != CFA_NOERR)
+        throw CFA::Exception(cfaErr);
+    
+    return ncId;
+}
+
+void CFA::Var::setNCAttText(std::string attName, std::string value)
+{
+    int cfaErr = CFA_NOERR;
+
+    cfaErr = nc_put_att_text(getNcFileId(), getNcVarId(), attName.c_str(), value.size(), value.c_str());
+    if(cfaErr != CFA_NOERR)
+        throw CFA::Exception(cfaErr);
 }
 
 AggregationVariable* CFA::Var::getAggVar()
