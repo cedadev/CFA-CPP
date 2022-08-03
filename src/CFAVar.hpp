@@ -43,7 +43,8 @@ namespace CFA
             void addAggInstr(std::string name, std::string value, bool scalar);
 
             /* Add Fragment */
-            void addFragment(size_t fragLocation[], size_t dataLocation[], std::string file, std::string format, std::string address, std::string units);
+            void defFragments(int frags[]);
+            void addFragment(size_t fragLocation[], size_t dataLocation[], const char *file, const char *format, const char *address, const char *units);
 
             int getNcVarId(int ncId);
             /* Set the value of the `Name` NC Attribute */

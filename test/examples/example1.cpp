@@ -45,13 +45,15 @@ void save()
         temperature.addAggInstr("location", "aggregation_location", 0);
 
         /* Add Fragments */
+        int frags[4] = {2, 1, 1, 1};
+        temperature.defFragments(frags);
         /* First Fragment */
         size_t frag1Location[4] = {0, 0, 0, 0};
         temperature.addFragment(frag1Location, NULL, "January-June.nc", "nc", "temp", NULL);
         /* Second Fragment */
         size_t frag2Location[4] = {1, 0, 0, 0};
         temperature.addFragment(frag2Location, NULL, "July-December.nc", "nc", "temp", NULL);
-
+            
         /* Output Info */
         cfaErr = cfa_info(file.getId(), 0);
         if(cfaErr)

@@ -104,10 +104,18 @@ void CFA::Var::addAggInstr(std::string name, std::string value, bool scalar)
         throw CFA::Exception(cfaErr);
 }
 
-void CFA::Var::addFragment(size_t fragLocation[], size_t dataLocation[], std::string file, std::string format, std::string address, std::string units)
+void CFA::Var::defFragments(int frags[])
 {
     int cfaErr = CFA_NOERR;
-    cfaErr = cfa_var_put1_frag(parentId, id, fragLocation, dataLocation, file.c_str(), format.c_str(), address.c_str(), units.c_str());
+    cfaErr = cfa_var_def_frag_num(parentId, id, frags);
+    if(cfaErr)
+        throw CFA::Exception(cfaErr);
+}
+
+void CFA::Var::addFragment(size_t fragLocation[], size_t dataLocation[], const char *file, const char *format, const char *address, const char *units)
+{
+    int cfaErr = CFA_NOERR;
+    cfaErr = cfa_var_put1_frag(parentId, id, fragLocation, dataLocation, file, format, address, units);
     if(cfaErr)
         throw CFA::Exception(cfaErr);
 }
