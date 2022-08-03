@@ -36,33 +36,24 @@ cfa_type CFA::Dim::getType()
     return getAggDim()->cfa_dtype.type;
 }
 
-int CFA::Dim::getNcVarId()
+int CFA::Dim::getNcVarId(int ncId)
 {
     int cfaErr = CFA_NOERR;
 
     int ncVarId = -1;
-    cfaErr = nc_inq_varid(getNcFileId(), getAggDim()->name, &ncVarId);
-    if(cfaErr != CFA_NOERR)
-        throw CFA::Exception(cfaErr);
-}
-
-int CFA::Dim::getNcFileId()
-{
-    int cfaErr = CFA_NOERR;
-
-    int ncId = -1;
-    cfaErr = cfa_get_ext_file_id(parentId, &ncId);
-    if(cfaErr != CFA_NOERR)
+    cfaErr = nc_inq_varid(ncId, getAggDim()->name, &ncVarId);
+    if(cfaErr)
         throw CFA::Exception(cfaErr);
     
-    return ncId;
+    return ncVarId;
 }
-void CFA::Dim::setNCAttText(std::string attName, std::string value)
+
+void CFA::Dim::setNCAttText(int ncId, std::string name, std::string value)
 {
     int cfaErr = CFA_NOERR;
 
-    cfaErr = nc_put_att_text(getNcFileId(), getNcVarId(), attName.c_str(), value.size(), value.c_str());
-    if(cfaErr != CFA_NOERR)
+    cfaErr = nc_put_att_text(ncId, getNcVarId(ncId), name.c_str(), value.size(), value.c_str());
+    if(cfaErr)
         throw CFA::Exception(cfaErr);
 }
 

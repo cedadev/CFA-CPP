@@ -39,8 +39,14 @@ namespace CFA
             std::vector<Dim> getDims();
             std::vector<std::string> getDimNames();
 
-            int getNcVarId();
-            int getNcFileId();
-            void setNCAttText(std::string attName, std::string value);
+            /* Add Aggregation Instruction */
+            void addAggInstr(std::string name, std::string value, bool scalar);
+
+            /* Add Fragment */
+            void addFragment(size_t fragLocation[], size_t dataLocation[], std::string file, std::string format, std::string address, std::string units);
+
+            int getNcVarId(int ncId);
+            /* Set the value of the `Name` NC Attribute */
+            void setNCAttText(int ncId, std::string name, std::string value);
     };
 }

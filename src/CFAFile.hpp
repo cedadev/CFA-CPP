@@ -17,6 +17,7 @@ namespace CFA
         public:
             File(std::string path, FileFormat format = FileFormat::CFANetCDF, FileMode mode = FileMode::Read);
             
+            int getNcId();
             void enddef();
             void close();
     };

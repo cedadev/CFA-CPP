@@ -96,34 +96,40 @@ std::vector<std::string> CFA::Var::getDimNames()
     return dimNames;
 }
 
-int CFA::Var::getNcVarId()
+void CFA::Var::addAggInstr(std::string name, std::string value, bool scalar)
+{
+    int cfaErr = CFA_NOERR;
+    cfaErr = cfa_var_def_agg_instr(parentId, id, name.c_str(), value.c_str(), scalar);
+    if(cfaErr)
+        throw CFA::Exception(cfaErr);
+}
+
+void CFA::Var::addFragment(size_t fragLocation[], size_t dataLocation[], std::string file, std::string format, std::string address, std::string units)
+{
+    int cfaErr = CFA_NOERR;
+    cfaErr = cfa_var_put1_frag(parentId, id, fragLocation, dataLocation, file.c_str(), format.c_str(), address.c_str(), units.c_str());
+    if(cfaErr)
+        throw CFA::Exception(cfaErr);
+}
+
+int CFA::Var::getNcVarId(int ncId)
 {
     int cfaErr = CFA_NOERR;
 
     int ncVarId = -1;
-    cfaErr = nc_inq_varid(getNcFileId(), getAggVar()->name, &ncVarId);
-    if(cfaErr != CFA_NOERR)
+    cfaErr = nc_inq_varid(ncId, getAggVar()->name, &ncVarId);
+    if(cfaErr)
         throw CFA::Exception(cfaErr);
+
+    return ncVarId;
 }
 
-int CFA::Var::getNcFileId()
+void CFA::Var::setNCAttText(int ncId, std::string name, std::string value)
 {
     int cfaErr = CFA_NOERR;
 
-    int ncId = -1;
-    cfaErr = cfa_get_ext_file_id(parentId, &ncId);
-    if(cfaErr != CFA_NOERR)
-        throw CFA::Exception(cfaErr);
-    
-    return ncId;
-}
-
-void CFA::Var::setNCAttText(std::string attName, std::string value)
-{
-    int cfaErr = CFA_NOERR;
-
-    cfaErr = nc_put_att_text(getNcFileId(), getNcVarId(), attName.c_str(), value.size(), value.c_str());
-    if(cfaErr != CFA_NOERR)
+    cfaErr = nc_put_att_text(ncId, getNcVarId(ncId), name.c_str(), value.size(), value.c_str());
+    if(cfaErr)
         throw CFA::Exception(cfaErr);
 }
 
