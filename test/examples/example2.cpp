@@ -11,11 +11,11 @@
 #include "CFAFileFormat.hpp"
 #include "CFAException.hpp"
 
-const std::string path = "./examples/test/example1.nc";
+const std::string path = "./examples/test/example2.nc";
 
-void save()
+int main()
 {
-    std::cout << "Example 1 Test Save\n";
+    std::cout << "Example 2 Test\n";
     try
     {
         int cfaErr = CFA_NOERR;
@@ -50,15 +50,14 @@ void save()
         temperature.defFragments(frags);
         /* First Fragment */
         size_t fragLocation[4] = {0, 0, 0, 0};
-        temperature.addFragment(fragLocation, NULL, "January-June.nc", "nc", "temp", NULL);
+        size_t dataLocation[8] = {0, 6, 0, 1, 0, 1, 0, 1};
+        temperature.addFragment(fragLocation, dataLocation, "January-June.nc", "nc", "temp", NULL);
+
         /* Second Fragment */
-        fragLocation[0] = 1;
-        temperature.addFragment(fragLocation, NULL, "July-December.nc", "nc", "temp", NULL);
-            
-        /* Output Info */
-        cfaErr = cfa_info(file.getId(), 0);
-        if(cfaErr)
-            throw CFA::Exception(cfaErr);
+        fragLocation[0] = 1; // Iterate to the next Fragment location
+        dataLocation[0] = 6; // Iterate to the next location in the parrent array
+        temperature.addFragment(fragLocation, dataLocation, NULL, NULL, "temp2", NULL);
+
         /* Write out initial structures, variables, etc. */
         file.enddef();
 
@@ -93,6 +92,18 @@ void save()
         if(cfaErr)
             throw CFA::Exception(cfaErr);
 
+        /* Create the temp2 variable */
+        const int temp2DimIds[3] = {time.getNcVarId(file.getNcId()), latitude.getNcVarId(file.getNcId()), longitude.getNcVarId(file.getNcId())};
+        int ncTemp2VarId = -1;
+        cfaErr = nc_def_var(file.getNcId(), "temp2", NC_DOUBLE, 3, temp2DimIds, &ncTemp2VarId);
+        if(cfaErr)
+            throw CFA::Exception(cfaErr);
+
+        /* Add temp2 metadata */
+        cfaErr = nc_put_att_text(file.getNcId(), ncTemp2VarId, "units", 8, "degreesC");
+        if(cfaErr)
+            throw CFA::Exception(cfaErr);
+
         /* Write the data for the time variable */
         const size_t timeStart = 0;
         const size_t timeSpan = 12;
@@ -100,6 +111,12 @@ void save()
         cfaErr = nc_put_vara_int(file.getNcId(), time.getNcVarId(file.getNcId()), &timeStart, &timeSpan, timeVals);
         if(cfaErr)
             throw CFA::Exception(cfaErr);
+
+        /* Write the data for the temp2 variable */
+        const size_t temp2Start[3] = {0, 0, 0};
+        const size_t temp2Span[3] = {1, 1, 6};
+        const double temp2Vals[6] = {4.5, 3.0, 0.0, -2.6, -5.6, -10.2};
+        cfaErr = nc_put_vara_double(file.getNcId(), ncTemp2VarId, temp2Start, temp2Span, temp2Vals);
 
         /* Output Info */
         cfaErr = cfa_info(file.getId(), 0);
@@ -118,50 +135,5 @@ void save()
     {
         std::cerr << e.what() << '\n';
     }
-}
-
-void load()
-{
-    std::cout << "Example 1 Test Load\n";
-    try
-    {
-        int cfaErr = CFA_NOERR;
-        /* Load and parse the CFA parent container */
-        CFA::File file(path, CFA::FileFormat::CFANetCDF, CFA::FileMode::Read);
-        
-        /* Get the "temp" variable */
-        CFA::Var temperature = file.getVar("temp");
-
-        /* Get the first fragment */
-        size_t fragLocation[4] = {0, 0, 0, 0};
-        Fragment frag1 = temperature.getFragmentByFragLocation(fragLocation);
-
-        /* Get the fragment by data location */
-        size_t dataLocation[4] = {6, 0, 0, 0};
-        Fragment frag2 = temperature.getFragmentByDataLocation(dataLocation);
-
-        /* Output Info */
-        cfaErr = cfa_info(file.getId(), 0);
-        if(cfaErr)
-            throw CFA::Exception(cfaErr);
-
-        /* Close file - frees the memory */
-        file.close();
-
-        /* Check for memory leaks */
-        cfaErr = cfa_memcheck();
-        if(cfaErr)
-            throw CFA::Exception(cfaErr);
-    }
-    catch(const CFA::Exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
     
-}
-
-int main(void)
-{
-    save();
-    load();
 }
