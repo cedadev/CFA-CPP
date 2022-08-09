@@ -69,38 +69,38 @@ CFA::Var CFA::Group::addVar(std::string name, cfa_type type)
 
 CFA::Var CFA::Group::addVar(std::string name, cfa_type type, int dimId)
 {
-    CFA::Var Var(id, name, type);
-    int cfaErr = Var.updateDims(dimId);
+    CFA::Var var(id, name, type);
+    int cfaErr = var.updateDims(dimId);
     if(cfaErr)
         throw Exception(cfaErr);
-    return Var;
+    return var;
 }
 
 CFA::Var CFA::Group::addVar(std::string name, cfa_type type, std::string dimName)
 {
-    CFA::Var Var(id, name, type);
-    int cfaErr = Var.updateDims(dimName);
+    CFA::Var var(id, name, type);
+    int cfaErr = var.updateDims(dimName);
     if(cfaErr)
         throw Exception(cfaErr);
-    return Var;
+    return var;
 }
 
 CFA::Var CFA::Group::addVar(std::string name, cfa_type type, std::vector<int> dimIds)
 {
-    CFA::Var Var(id, name, type);    
-    int cfaErr = Var.updateDims(dimIds);
+    CFA::Var var(id, name, type);    
+    int cfaErr = var.updateDims(dimIds);
     if(cfaErr)
         throw Exception(cfaErr);
-    return Var;
+    return var;
 }
 
 CFA::Var CFA::Group::addVar(std::string name, cfa_type type, std::vector<std::string> dimNames)
 {
-    CFA::Var Var(id, name, type);    
-    int cfaErr = Var.updateDims(dimNames);
+    CFA::Var var(id, name, type);    
+    int cfaErr = var.updateDims(dimNames);
     if(cfaErr)
         throw Exception(cfaErr);
-    return Var;
+    return var;
 }
 
 CFA::Dim CFA::Group::getDim(std::string name)
